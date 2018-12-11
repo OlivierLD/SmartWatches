@@ -2,7 +2,7 @@
 Smart watches and wearable applications
 
 ### Pebble
-Was acquired by Fitbit.
+Was acquired by Fitbit. My [Pebble repo](https://github.com/OlivierLD/pebble) is still here, but might not be there forever.
 
 ### Samsung Frontier
 #### To get started
