@@ -25,4 +25,4 @@ Preferences > Network Connections, in all packages (Tizen, Certificates Manager,
 - Build Signed Package, then Run or Debug on the device.
 
 ##### Step-by-step, install and run the `Hello Tizen` example
-
+... Soon.
