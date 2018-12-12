@@ -1,5 +1,25 @@
 /*
  * C'est MOI qui l'ai fait.
+ *
+ * REST Data look like
+{
+  "type": "ALL",
+  "period": "LAST",
+  "query": "SELECT ... ",
+  "data": [
+    {
+      "time": "2018-12-12 02:46:11",
+      "wdir": 306,
+      "gust": 10.32,
+      "ws": 7.87,
+      "rain": 0,
+      "press": 1020.67,
+      "atemp": 17.5,
+      "hum": 64.213,
+      "dew": 10.676
+    }
+  ]
+}
  */
 "use strict";
 
