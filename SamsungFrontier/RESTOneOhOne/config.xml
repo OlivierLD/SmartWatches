@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/HelloTizen" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="TvFhgEqcaE.HelloTizen" package="TvFhgEqcaE" required_version="2.3"/>
+    <author email="olivier@lediouris.net">Olivier LeDiouris</author>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <name>REST 101</name>
+    <tizen:profile name="wearable"/>
+</widget>

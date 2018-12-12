@@ -25,4 +25,50 @@ Preferences > Network Connections, in all packages (Tizen, Certificates Manager,
 - Build Signed Package, then Run or Debug on the device.
 
 ##### Step-by-step, install and run the `Hello Tizen` example
-... Soon.
+- In Tizen, New Project > Sample > Next > Wearable > Next > Web Application > Next > General > Hello Tizen > Next > Finish
+- On the watch, Settings > About Gear > Debugging, make sure it is on
+- On the watch, Settings > Connections > Wi-Fi > Wi-Fi Networks, find your Network and connect to it.
+- On the watch, Settings > Connections > Wi-Fi > Wi-Fi Networks, tap network name, and find your IP address.
+- In Tizen, Device Manager > Remote Device Manager > Find your device, and make sure in is ON.
+- In Tizen, Certificate Manager > create a new Samsung Certificate > Mobile/Wearable > Creat a new profile, give it a name > Next > Create a new author certificate > Next > fill the fields, check the "apply the same password for distributor certificate" box > Next > Logging to your Samsung account when prompted > Next (Backup path not mandatory) > Next > Create a new distributor certificate > Enter passwords, and from the Device Manager, for each device (including Emulators you have started before), right-click on the device name, find the DUID > Click the 'Copy' button > Next > Finish > Make sure the certificate is active (checked). > Close.
+- If Tizen is running (and it probably is), re-start it.
+- In Tizen, right-click on your app (Hello Tizen) > Build signed packaged
+- In the menu bar, select the device or the emulator in the drop-down list
+- In the menu bar, from the "Run" poplist or from a right-click on the app name > Run (or Debug) as > Tizen Web App
+    - The app should be installed on your device.
+- Try to modify the code, add some `console` statements, re-build, re-run, and see for yourself!
+
+##### REST Requests
+Here is a way to make a REST GET request to some external resource:
+```javascript
+    // Do some REST Request here
+    let url = "http://donpedro.lediouris.net/php/weather/reports.v2/json.data.php?type=ALL&period=LAST";
+    let xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+//          console.log("XHR returns", xhr.responseText);
+            let resp = JSON.parse(xhr.responseText);
+            if (resp !== undefined && resp.data !== undefined && resp.data.length > 0) {
+                console.log(JSON.stringify(resp, null, 2));
+            } else {
+                console.log(JSON.stringify(resp, null, 2));
+            }
+        } else {
+            let errMess = "XHR: State:" + xhr.status + "\nRS:" + xhr.readyState;
+            console.log(errMess);
+        }
+    };
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send();
+    console.log("Weather data was requested");
+```
+
+Make sure you use `"use strict";` if you need to use ES6 syntax.
+
+As it is a Web Application, your browser's Developer tools are available in `debug` mode. Very cool.
+
+#### To check
+- Web Socket availability?
+- Need for the cell phone when connected to a Network?
