@@ -148,7 +148,7 @@ function setRelay(relay, checkbox, callback) {
         }
     }
 
-    // Trap it, jsut to see how to do it.
+    // Trap it, just to see how to do it.
     // TODO: Flip the switch with the rotary?
     function rotEventHandler(event) {
         console.log("Rotary HW Event", event, event.detail.direction);
