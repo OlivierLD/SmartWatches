@@ -139,12 +139,24 @@ function setRelay(relay, checkbox, callback) {
         // Display keynames here
         console.log("Tizen HW Event", event, event.keyName);
 
-        if (event.keyName === "back") {
+        if (event.keyName === "back") { // No "menu" on wearable
             try {
                 console.debug('Exiting app');
                 // If the back key is pressed, exit the application.
                 tizen.application.getCurrentApplication().exit();
             } catch (ignore) {}
+        }
+    }
+
+    // Trap it, jsut to see how to do it.
+    // TODO: Flip the switch with the rotary?
+    function rotEventHandler(event) {
+        console.log("Rotary HW Event", event, event.detail.direction);
+
+        if (event.detail.direction === "CW") {
+        		console.log("Detent, clockwise");
+        } else if (event.detail.direction === "CCW") {
+        		console.log("Detent, counter-clockwise");
         }
     }
 
@@ -156,6 +168,7 @@ function setRelay(relay, checkbox, callback) {
         // Add hardware event listener
         document.addEventListener("tizenhwkey", keyEventHandler);
 
+        document.addEventListener("rotarydetent", rotEventHandler);
         // Event Listeners would go here
     }
 

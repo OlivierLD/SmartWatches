@@ -8,19 +8,23 @@
 </Reference>
 <Reference URI="css%2Fstyle.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ZMcMXv9fg3647HfsGzvi21SXyOd3/VEw5+3rXfICtFw=</DigestValue>
+<DigestValue>RcE0FICMlsF2i9UdjBzTIkp16DUSAiqYkPDBSkdFN98=</DigestValue>
 </Reference>
 <Reference URI="icon.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>vPjxjOppORd6hn9Bw4sh06gqtDoJzoFbV/8e9FyIdvk=</DigestValue>
+<DigestValue>dAPFGuFgXkGPJ6pFQ6jAa4pN9X7TRsTx8nLgfpvILlc=</DigestValue>
+</Reference>
+<Reference URI="icon.xcf">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>JRUansB+jblTRUiv5yp3EEpb5wt95fmyI1oSr5Z6vf0=</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>m/ySXhCbD8SqoN67C4duEV4DMRs2qKc18NAK/dHk+P8=</DigestValue>
+<DigestValue>36bIm+g/5NFsivS26VPbKbEbbt/N3X8CNChKlwopVtc=</DigestValue>
 </Reference>
 <Reference URI="js%2Fmain.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>YI0YjneazUMPupD28siEu5KcQaoJo0Am+tIXGjzzkHE=</DigestValue>
+<DigestValue>jkHJMtyQzA44j5ChaqYzogAjMV9WXf+CUEgqr58MqbI=</DigestValue>
 </Reference>
 <Reference URI="#prop">
 <Transforms>
@@ -31,9 +35,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-gQt1/7wxobwmWYJSyfde8WUBOAa9s4pgTAMr2hwhmTe+bqqfUX96860+SIjilg/SyWBdpZRdJUkn
-98fYI5hgxn+9y5eR8BD62WWITvTgHRw7vkjNu2bZLnhHFZ8XHaHN41sR8s7+WNR32uxFW5EXHo/C
-BLbfZ4vO9Tqueo3iNXQ=
+l/0Tv4NfSGC3BOKwNcVlDLeNlKf3mn068u6TmeobCnTp03OQPTln/DI98E75xpVB/XGM8mv+j/mU
+5VKZVNjc7DTDVR2eWn4U1ayTZKK6KIBUeuvDSBctp5zpTKPLY7jXxKgA1GOmT8W1YL1tlZ9UqJXr
+w0M/M/2//3otkTj4sBw=
 </SignatureValue>
 <KeyInfo>
 <X509Data>
