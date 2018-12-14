@@ -23,6 +23,20 @@
  */
 "use strict";
 
+const READY_STATE = {
+	NOT_INITIALIZED: 0,
+	SERVER_CONNECTION_ESTABLISHED: 1,
+	REQUEST_RECEIVED: 2,
+	PROCESSING_REQUEST: 3,
+	REQUEST_FINISHED_RESPONSE_READY: 4
+};
+
+const STATUS = {
+	OK: 200,
+	FORBIDDEN: 403,
+	NOT_FOUND: 404
+};
+
 (function() {
     /**
      * Handles the hardware key event.
@@ -74,23 +88,24 @@
                 let 	xhr = new XMLHttpRequest();
 
                 	xhr.onreadystatechange = function() {
-                		if (xhr.readyState === 4 && xhr.status === 200) {
+                		if (xhr.readyState === READY_STATE.REQUEST_FINISHED_RESPONSE_READY && xhr.status === STATUS.OK) {
 //                		console.log("XHR returns", xhr.responseText);
-            				let resp = JSON.parse(xhr.responseText);
-            				if (resp !== undefined && resp.data !== undefined && resp.data.length > 0) {
-            					console.log(JSON.stringify(resp, null, 2));
-            					try {
-            						windData.ws = resp.data[0].ws;
-            						windData.wdir = resp.data[0].wdir;
-            						console.log("Vars:", windData);
-            					} catch (err) {
-            						console.log("Error:", err);
-            					}
-            				} else {
-            					console.log(JSON.stringify(resp, null, 2));
-            				}
+	                    let resp = JSON.parse(xhr.responseText);
+	                    if (resp !== undefined && resp.data !== undefined && resp.data.length > 0) {
+	                      console.log(JSON.stringify(resp, null, 2));
+	                      let data = resp.data[0];
+	                      try {
+	                        windData.ws = data.ws;
+	                        windData.wdir = data.wdir; // etc!
+	                        console.log("Vars:", windData);
+	                      } catch (err) {
+	                        console.log("Error:", err);
+	                      }
+	                    } else {
+	                      console.log(JSON.stringify(resp, null, 2));
+	                    }
                 		} else {
-                			let errMess = "XHR: State:" + xhr.status + "\nRS:" + xhr.readyState;
+                			let errMess = "XHR: State:" + xhr.status + "\nRS:" + xhr.readyState + ", " + xhr.statusText;
                 			console.log(errMess);
                 		}
                 	};

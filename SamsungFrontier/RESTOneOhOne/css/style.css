@@ -15,12 +15,12 @@ html, body {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    background-color:#aaaaff;
+    background-color: white;
     -webkit-tap-highlight-color: transparent;
 }
 
 #content_text {
     font-weight: bold;
-    font-size: 5em;
+    font-size: 10em;
     color: #ffffff;
 }

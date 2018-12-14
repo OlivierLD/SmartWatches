@@ -71,4 +71,3 @@ As it is a Web Application, your browser's Developer tools are available in `deb
 
 #### To check
 - Web Socket availability?
-- Need for the cell phone when connected to a Network?
