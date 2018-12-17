@@ -28,13 +28,23 @@ body {
     color: #fff;
 }
 .the-slides {
-    display: none;
     height: 300px;
     grid-area: center;
     margin: auto;
+	transition: max-height 1s ease-out, opacity 0.5s ease-out, transform 0.5s ease-out;
+	opacity: 0;
+	max-width: 0;
+	transform: scaleX(0);
+	overflow: hidden;
 }
-/* Slideshow container */
 
+.visible-slide {
+	opacity: 1;
+	max-width: 200px;
+	transform: scaleX(1);
+}
+
+/* Slideshow container */
 .slideshow-container {
     max-width: 340px;
     margin: auto;
@@ -112,7 +122,7 @@ body {
 }
 .active,
 .dot:hover {
-    background-color: #717171;
+    background-color: cyan; /*#717171;*/
 }
 .dots {
     position: relative;
@@ -145,15 +155,7 @@ body {
         opacity: 1
     }
 }
-/* On smaller screens, decrease text size */
 
-@media only screen and (max-width: 300px) {
-    .prev,
-    .next,
-    .text {
-        font-size: 11px
-    }
-}
 .display {
     width: 200px;
     height: 300px;
@@ -182,10 +184,10 @@ body {
 }
 .display-title {
     grid-area: top;
-    text-align: left;
+    text-align: center;
     vertical-align: bottom;
-    padding-left: 10px;
+    padding-left: 0;
     align-self: end;
     color: inherit;
-    font-size: 16px;
+    font-size: 14px;
 }
