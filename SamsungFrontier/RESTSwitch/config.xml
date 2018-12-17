@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/RESTSwitch" version="1.0.0" viewmodes="maximized">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/RESTSwitch" version="0.0.5" viewmodes="maximized">
     <tizen:application id="DhVSVAM1tU.RESTSwitch" package="DhVSVAM1tU" required_version="4.0"/>
+    <author email="olivier@lediouris.net">Olivier LeDiouris</author>
     <content src="index.html"/>
+    <description>An example. Showing how to deal with REST services from a Fromtier Samsung watch.</description>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <icon src="icon.png"/>
-    <name>RESTSwitch</name>
+    <license>MIT</license>
+    <name>REST Switch</name>
     <tizen:profile name="wearable"/>
 </widget>
