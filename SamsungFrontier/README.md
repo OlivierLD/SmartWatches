@@ -4,7 +4,12 @@ Use the [Tizen IDE](https://www.tizen.org/) to  build them.
 
 -----------------------------------------------------------
 
-### NMEA Client
+### REST Remote Switch
+Drive a Relay connected to a Raspberry Pi.
+
+### Weather Station Client ☁️☀️⛅
+
+### NMEA Client ⛵
 #### WIP 🚧 REST Client for the Nav Server.
 
 | BSP | AWS | SOG |
@@ -13,9 +18,10 @@ Use the [Tizen IDE](https://www.tizen.org/) to  build them.
 
 The rotary detent can be used to change screen, like the left and right arrows.
 
+---
+
 ### TODO
-- REST Requests
-- GPS Location
-- Local JavaScript, where to put it?
+- GPS Location 🛰️
 - Street Cleaning 🚗
 
+---
