@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/NMEAClient" version="1.0.0" viewmodes="maximized">
+    <access origin="*" subdomains="true"/>
+    <tizen:application id="Y4jP3WhJS1.NMEAClient" package="Y4jP3WhJS1" required_version="3.0"/>
+    <author email="olivier@lediouris.net">Olivier LeDiouris</author>
+    <content src="index.html"/>
+    <description>Samsung Frontier client for the REST Nav Server or NMEA.multiplexer.
+See https://github.com/OlivierLD/raspberry-coffee/tree/master/NMEA.multiplexer
+and https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTNavServer</description>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <license>MIT</license>
+    <name>NMEA Client</name>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <tizen:profile name="wearable"/>
+</widget>

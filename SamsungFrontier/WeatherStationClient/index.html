@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="NMEA Client, for a REST Nav Server" />
+
+    <title>NMEA Client</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/main.js"></script>
+</head>
+
+<body> 
+    <div class=contents>
+        <div style='margin:auto;'>
+            <!-- span class=content_text id=textbox>Basic</span-->
+            <input type="checkbox" onchange="manageClick(this);" />Auto-scroll
+			<br/>
+			<span class="reload" onclick="getWeatherData();" title="Reload data">&#x21BB;</span> <!-- Reload -->
+            <div class="slideshow-container">
+
+                <div class="the-slides fade">
+                    <div class="number-text">1 / 8</div>
+                    <div class="display">
+                        <span class="display-title">Wind Speed</span>
+                        <span class="display-data" id="ws">00.00</span>
+                        <span class="display-unit">knots</span>
+                    </div>
+                    <div class="text">TWS</div>
+                </div>
+
+                <div class="the-slides fade">
+                    <div class="number-text">2 / 8</div>
+                    <div class="display">
+                        <span class="display-title">Wind Direction</span>
+                        <span class="display-data" id="wdir">000</span>
+                        <span class="display-unit">degrees</span>
+                    </div>
+                    <div class="text">TWD</div>
+                </div>
+
+                <div class="the-slides fade">
+                    <div class="number-text">3 / 8</div>
+                    <div class="display">
+                        <span class="display-title">Wind Gust</span>
+                        <span class="display-data" id=gust>00.00</span>
+                        <span class="display-unit">knots</span>
+                    </div>
+                    <div class="text">GST</div>
+                </div>
+
+                <div class="the-slides fade">
+                    <div class="number-text">4 / 8</div>
+                    <div class="display">
+                        <span class="display-title">Atmospheric Pressure</span>
+                        <span class="display-data" style="font-size: 48px;" id="press">1013.6</span>
+                        <span class="display-unit">hPa</span>
+                    </div>
+                    <div class="text">PRMSL</div>
+                </div>
+
+                <div class="the-slides fade">
+                    <div class="number-text">5 / 8</div>
+                    <div class="display">
+                        <span class="display-title">Air Temperature</span>
+                        <span class="display-data" id="atemp">00.0</span>
+                        <span class="display-unit">degrees C</span>
+                    </div>
+                    <div class="text">ATEMP</div>
+                </div>
+
+                <div class="the-slides fade">
+                    <div class="number-text">6 / 8</div>
+                    <div class="display">
+                        <span class="display-title">Dew Point</span>
+                        <span class="display-data" id="dew">00.0</span>
+                        <span class="display-unit">degrees C</span>
+                    </div>
+                    <div class="text">DEW</div>
+                </div>
+
+                <div class="the-slides fade">
+                    <div class="number-text">7 / 8</div>
+                    <div class="display">
+                        <span class="display-title">Relative Humidity</span>
+                        <span class="display-data" id="hum">00</span>
+                        <span class="display-unit">%</span>
+                    </div>
+                    <div class="text">HUM</div>
+                </div>
+
+                <div class="the-slides fade">
+                    <div class="number-text">8 / 8</div>
+                    <div class="display">
+                        <span class="display-title">Rain</span>
+                        <span class="display-data" id="rain">00.0</span>
+                        <span class="display-unit">mm/h</span>
+                    </div>
+                    <div class="text">RAIN</div>
+                </div>
+
+                <div class="prev" onclick="plusSlides(-1);">&#10094;</div>
+                <div class="next" onclick="plusSlides(1);">&#10095;</div>
+
+                <div class="dots">
+                    <span class="dot" onclick="currentSlide(1);" title="TWS"></span>
+                    <span class="dot" onclick="currentSlide(2);" title="TWD"></span>
+                    <span class="dot" onclick="currentSlide(3);" title="GST"></span>
+                    <span class="dot" onclick="currentSlide(4);" title="PRMSL"></span>
+                    <span class="dot" onclick="currentSlide(5);" title="ATEMP"></span>
+                    <span class="dot" onclick="currentSlide(6);" title="DEW"></span>
+                    <span class="dot" onclick="currentSlide(7);" title="HUM"></span>
+                    <span class="dot" onclick="currentSlide(8);" title="RAIN"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    "use strict";
+    
+        let auto = false;
+        
+        	function manageClick(cb) {
+        		auto = cb.checked;
+        		if (auto) {
+        			showSlides(slideIndex);
+        		}
+        	}
+        
+        	let slideIndex = 1;
+        	showSlides(slideIndex);
+        
+        	function plusSlides(n) {
+        		showSlides(slideIndex += n);
+        	}
+        
+        	function currentSlide(n) {
+        		showSlides(slideIndex = n);
+        	}
+        
+        	function showSlides(n) {
+        		let slides = document.getElementsByClassName("the-slides");
+        		let dots = document.getElementsByClassName("dot");
+        		if (n > slides.length) {
+        			slideIndex = 1;
+        		}
+        		if (n < 1) {
+        			slideIndex = slides.length;
+        		}
+        		for (let i = 0; i < slides.length; i++) {
+        	//		slides[i].style.display = "none";
+				slides[i].classList.remove("visible-slide");
+        		}
+        		if (!auto) {
+        			for (let i = 0; i < dots.length; i++) {
+        				dots[i].className = dots[i].className.replace(" active", "");
+        			}
+//				slides[slideIndex - 1].style.display = "block";
+				slides[slideIndex - 1].classList.add("visible-slide"); // Show active one
+        			dots[slideIndex - 1].className += " active";
+        		} else { // Auto
+        			slideIndex++;
+        			if (slideIndex > slides.length) {
+        				slideIndex = 1
+        			}
+        			for (let i = 0; i < dots.length; i++) {
+        				dots[i].className = dots[i].className.replace(" active", "");
+        			}
+//				slides[slideIndex - 1].style.display = "block";
+				slides[slideIndex - 1].classList.add("visible-slide"); // Show active one
+        			dots[slideIndex - 1].className += " active";
+        			setTimeout(showSlides, 5000); // Change screen every 5 seconds
+        		}
+        	}
+    </script>
+
+</body>
+
+</html>
