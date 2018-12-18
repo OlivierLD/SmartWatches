@@ -54,7 +54,9 @@ const STATUS = {
 
     let windData = {
     		ws: 0,
-    		wdir: 0
+    		wdir: 0,
+    		press: 0,
+    		atemp: 0
     };
 
     const START_WITH = "Hi there! Tap to see the data.";
@@ -77,7 +79,10 @@ const STATUS = {
             if (box.innerHTML === START_WITH) {
                 // If the text in box is "Hello Tizen", change it to "Hi WebApp"
             		let html = "<b>Weather Data</b>";
-            		html += "<br/>Date:" + (new Date()) + "<br/>Speed:" + windData.ws.toFixed(2) + " kts<br/>Dir:" + windData.wdir.toFixed(0) + "&deg;";
+            		html += "<br/>Date:" + (new Date()) + 
+            		"<br/>Speed:" + windData.ws.toFixed(2) + " kts<br/>Dir:" + windData.wdir.toFixed(0) + "&deg;" +
+            		"<br/>PRMSL:" + windData.press.toFixed(1) + " hPa<br/>" +
+            		"<br/>T:" + windData.atemp.toFixed(1) + " &deg;C<br/>";
                 box.innerHTML = html;
             } else {
                 // If the text in box is not "Hello Tizen", change it to "Hello Tizen"
@@ -96,7 +101,9 @@ const STATUS = {
 	                      let data = resp.data[0];
 	                      try {
 	                        windData.ws = data.ws;
-	                        windData.wdir = data.wdir; // etc!
+	                        windData.wdir = data.wdir; 
+	                        windData.atemp = data.atemp;
+	                        windData.press = data.press; // etc!
 	                        console.log("Vars:", windData);
 	                      } catch (err) {
 	                        console.log("Error:", err);

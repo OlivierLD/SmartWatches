@@ -22,8 +22,8 @@ function getPromise(
     timeout, // After that, fail.
     verb, // GET, PUT, DELETE, POST, etc
     happyCode, // if met, resolve, otherwise fail.
-    data = null, // payload, when needed (PUT, POST...)
-    show = false) { // Show the traffic [true]|false
+    data, // payload, when needed (PUT, POST...)
+    show) { // Show the traffic [true]|false
 
     if (show === true) {
         document.body.style.cursor = 'wait';

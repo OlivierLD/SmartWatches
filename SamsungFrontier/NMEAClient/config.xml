@@ -6,4 +6,5 @@
     <icon src="icon.png"/>
     <name>NMEA Client</name>
     <tizen:profile name="wearable"/>
+	<tizen:privilege name="tizen.org/privilege/internet"/>
 </widget>
