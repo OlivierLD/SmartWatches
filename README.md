@@ -26,6 +26,7 @@ Preferences > Network Connections, in all packages (Tizen, Certificates Manager,
 
 ##### Step-by-step, install and run the `Hello Tizen` example
 - In Tizen, New Project > Sample > Next > Wearable > Next > Web Application > Next > General > Hello Tizen > Next > Finish
+  - **Important** Choose a Tizen version matching the target device !! (Frontier is 3.0.0.2)
 - On the watch, Settings > About Gear > Debugging, make sure it is on
 - On the watch, Settings > Connections > Wi-Fi > Wi-Fi Networks, find your Network and connect to it.
 - On the watch, Settings > Connections > Wi-Fi > Wi-Fi Networks, tap network name, and find your IP address.
@@ -37,6 +38,8 @@ Preferences > Network Connections, in all packages (Tizen, Certificates Manager,
 - In the menu bar, from the "Run" poplist or from a right-click on the app name > Run (or Debug) as > Tizen Web App
     - The app should be installed on your device.
 - Try to modify the code, add some `console` statements, re-build, re-run, and see for yourself!
+
+
 
 ##### REST Requests
 Here is a way to make a REST GET request to some external resource:
