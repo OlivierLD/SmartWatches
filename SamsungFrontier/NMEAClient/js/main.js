@@ -1,6 +1,4 @@
 window.onload = function () {
-	// TODO: Do your initialization job
-
 	// add eventListener for tizenhwkey
 	document.addEventListener('tizenhwkey', function (e) {
 		if (e.keyName === "back") {
@@ -24,4 +22,6 @@ window.onload = function () {
 	}
 
 	document.addEventListener("rotarydetent", rotEventHandler);
+
+	initAjax();
 };

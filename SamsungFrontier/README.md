@@ -4,6 +4,9 @@ Use the [Tizen IDE](https://www.tizen.org/) to  build them.
 
 -----------------------------------------------------------
 
+#### Lessons learned
+- CSS grid are supported... so-so on the Frontier.
+
 ### REST Remote Switch
 Drive a Relay connected to a Raspberry Pi.
 
