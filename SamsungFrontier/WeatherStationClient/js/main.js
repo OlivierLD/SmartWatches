@@ -156,5 +156,4 @@ window.onload = function () {
 	document.addEventListener('touchstart', handleTouchStart);
 	document.addEventListener('touchmove', handleTouchMove);
 
-
 };
