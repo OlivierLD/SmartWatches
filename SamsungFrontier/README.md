@@ -29,6 +29,12 @@ Drive a Relay connected to a Raspberry Pi.
 
 The rotary detent can be used to change screen, like the left and right arrows and swipes on the screen.
 
+##### The real watch
+
+| BSP  | AWS |
+|:----:|:---:|
+|![Apps](./docimg/watch.01.jpg)|![BSP](./docimg/watch.02.jpg)|
+
 ---
 
 ### TODO
