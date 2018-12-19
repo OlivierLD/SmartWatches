@@ -22,20 +22,20 @@
 "use strict";
 
 const READY_STATE = {
-    NOT_INITIALIZED: 0,
-    SERVER_CONNECTION_ESTABLISHED: 1,
-    REQUEST_RECEIVED: 2,
-    PROCESSING_REQUEST: 3,
-    REQUEST_FINISHED_RESPONSE_READY: 4
+	NOT_INITIALIZED: 0,
+	SERVER_CONNECTION_ESTABLISHED: 1,
+	REQUEST_RECEIVED: 2,
+	PROCESSING_REQUEST: 3,
+	REQUEST_FINISHED_RESPONSE_READY: 4
 };
 
 const STATUS = {
-    OK: 200,
-    FORBIDDEN: 403,
-    NOT_FOUND: 404
+	OK: 200,
+	FORBIDDEN: 403,
+	NOT_FOUND: 404
 };
 
-/* 
+/*
  data = {
     ws: 0,
     gust: 0,
@@ -60,59 +60,101 @@ function populateUI(data) {
 }
 
 function getWeatherData() {
-    // Do some REST Request here
-    let url = "http://donpedro.lediouris.net/php/weather/reports.v2/json.data.php?type=ALL&period=LAST";
-    let xhr = new XMLHttpRequest();
+	// Do some REST Request here
+	let url = "http://donpedro.lediouris.net/php/weather/reports.v2/json.data.php?type=ALL&period=LAST";
+	let xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === READY_STATE.REQUEST_FINISHED_RESPONSE_READY && xhr.status === STATUS.OK) {
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === READY_STATE.REQUEST_FINISHED_RESPONSE_READY && xhr.status === STATUS.OK) {
 //    		console.log("XHR returns", xhr.responseText);
-            let resp = JSON.parse(xhr.responseText);
-            if (resp !== undefined && resp.data !== undefined && resp.data.length > 0) {
-                console.log(JSON.stringify(resp, null, 2));
-                let data = resp.data[0];
-                try {
-                		populateUI(data);
-                } catch (err) {
-                    console.log("Error:", err);
-                }
-            } else {
-                console.log(JSON.stringify(resp, null, 2));
-            }
-        } else {
-            let errMess = "XHR: State:" + xhr.status + "\nRS:" + xhr.readyState + ", " + xhr.statusText;
-            console.log(errMess);
-        }
-    };
-    xhr.open("GET", url, true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.send();
-    console.log("Weather data was requested");
+			let resp = JSON.parse(xhr.responseText);
+			if (resp !== undefined && resp.data !== undefined && resp.data.length > 0) {
+				console.log(JSON.stringify(resp, null, 2));
+				let data = resp.data[0];
+				try {
+					populateUI(data);
+				} catch (err) {
+					console.log("Error:", err);
+				}
+			} else {
+				console.log(JSON.stringify(resp, null, 2));
+			}
+		} else {
+			let errMess = "XHR: State:" + xhr.status + "\nRS:" + xhr.readyState + ", " + xhr.statusText;
+			console.log(errMess);
+		}
+	};
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.send();
+	console.log("Weather data was requested");
 }
 
-window.onload = function() {
-    // TODO: Do your initialization job
+let xDown = null;
+let yDown = null;
 
-    // add eventListener for tizenhwkey
-    document.addEventListener('tizenhwkey', function(e) {
-        if (e.keyName === "back") {
-            try {
-                tizen.application.getCurrentApplication().exit();
-            } catch (ignore) {}
-        }
-    });
+function handleTouchStart(evt) {
+	xDown = evt.touches[0].clientX;
+	yDown = evt.touches[0].clientY;
+}
 
-    function rotEventHandler(event) {
-        // console.log("Rotary HW Event", event, event.detail.direction);
+function handleTouchMove(evt) {
+	if (!xDown || !yDown) {
+		return;
+	}
+	var xUp = evt.touches[0].clientX;
+	var yUp = evt.touches[0].clientY;
+	var xDiff = xDown - xUp;
+	var yDiff = yDown - yUp;
 
-        if (event.detail.direction === "CW") {
-            // console.log("Detent, clockwise");
-            plusSlides(1);
-        } else if (event.detail.direction === "CCW") {
-            // console.log("Detent, counter-clockwise");
-            plusSlides(-1);
-        }
-    }
+	// most significant
+	if (Math.abs(xDiff) > Math.abs(yDiff)) { // Left-right
+		if (xDiff > 0) {
+			/* left swipe */
+			plusSlides(-1);
+		} else {
+			/* right swipe */
+			plusSlides(1);
+		}
+	} else { // Up-Down, not needed here (yet...)
+		if (yDiff > 0) {
+			/* up swipe */
+		} else {
+			/* down swipe */
+		}
+	}
+	/* reset values */
+	xDown = null;
+	yDown = null;
+}
 
-    document.addEventListener("rotarydetent", rotEventHandler);
+window.onload = function () {
+	document.addEventListener('tizenhwkey', function (e) {
+		if (e.keyName === "back") {
+			try {
+				tizen.application.getCurrentApplication().exit();
+			} catch (ignore) {
+			}
+		}
+	});
+
+	function rotEventHandler(event) {
+		// console.log("Rotary HW Event", event, event.detail.direction);
+
+		if (event.detail.direction === "CW") {
+			// console.log("Detent, clockwise");
+			plusSlides(1);
+		} else if (event.detail.direction === "CCW") {
+			// console.log("Detent, counter-clockwise");
+			plusSlides(-1);
+		}
+	}
+
+	document.addEventListener("rotarydetent", rotEventHandler);
+
+	// Swipe detection
+	document.addEventListener('touchstart', handleTouchStart);
+	document.addEventListener('touchmove', handleTouchMove);
+
+
 };
