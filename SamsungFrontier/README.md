@@ -10,16 +10,24 @@ Use the [Tizen IDE](https://www.tizen.org/) to  build them.
 ### REST Remote Switch
 Drive a Relay connected to a Raspberry Pi.
 
+| Apps | Switch |
+|:----:|:------:|
+|![Apps](./docimg/RESTSwitch.01.png)|![AWS](./docimg/switch.01.png)|
+
 ### Weather Station Client ☁️☀️⛅
+
+| Apps | Client |
+|:----:|:------:|
+|![Apps](./docimg/weather.station.01.png)| ... |
 
 ### NMEA Client ⛵
 #### WIP 🚧 REST Client for the Nav Server.
 
-| BSP | AWS | SOG |
-|:---:|:---:|:---:|
-|![BSP](./docimg/BSP.png)|![AWS](./docimg/AWS.png)|![SOG](./docimg/SOG.png)|
+| Apps | BSP | AWS | SOG |
+|:----:|:---:|:---:|:---:|
+|![Apps](./docimg/nmea.client.01.png)|![BSP](./docimg/BSP.png)|![AWS](./docimg/AWS.png)|![SOG](./docimg/SOG.png)|
 
-The rotary detent can be used to change screen, like the left and right arrows.
+The rotary detent can be used to change screen, like the left and right arrows and swipes on the screen.
 
 ---
 
