@@ -5,7 +5,7 @@
     <author email="olivier@lediouris.net">Olivier LeDiouris</author>
     <content src="index.html"/>
     <feature name="http://tizen.org/feature/screen.size.all"/>
-    <icon src="icon.png"/>
+    <icon src="weather.icon.png"/>
     <license>MIT</license>
     <name>Weather Station Client</name>
     <tizen:privilege name="http://tizen.org/privilege/internet"/>

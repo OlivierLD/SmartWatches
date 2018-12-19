@@ -5,7 +5,7 @@
     <content src="index.html"/>
     <description>Samsung Frontier client app for the server app at https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTRelay</description>
     <feature name="http://tizen.org/feature/screen.size.all"/>
-    <icon src="icon.png"/>
+    <icon src="switch.icon.png"/>
     <license>MIT</license>
     <name>REST Switch 3.0</name>
     <tizen:profile name="wearable"/>
