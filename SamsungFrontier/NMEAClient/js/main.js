@@ -1,3 +1,5 @@
+"use strict";
+
 // Left-right swipe gesture management
 let xDown = null;
 let yDown = null;
@@ -20,10 +22,10 @@ function handleTouchMove(evt) {
 	if (Math.abs(xDiff) > Math.abs(yDiff)) { // Left-right
 		if (xDiff > 0) {
 			/* left swipe */
-			plusSlides(-1);
+			plusSlides(1);
 		} else {
 			/* right swipe */
-			plusSlides(1);
+			plusSlides(-1);
 		}
 	} else { // Up-Down, not needed here (yet...)
 		if (yDiff > 0) {

@@ -18,7 +18,7 @@ Drive a Relay connected to a Raspberry Pi.
 
 | Apps | Client |
 |:----:|:------:|
-|![Apps](./docimg/weather.station.01.png)| ... |
+|![Apps](./docimg/weather.station.01.png)|![Apps](./docimg/weather.station.02.png)|
 
 ### NMEA Client ⛵
 #### WIP 🚧 REST Client for the Nav Server.
