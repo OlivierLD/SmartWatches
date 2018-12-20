@@ -35,19 +35,6 @@ const STATUS = {
 	NOT_FOUND: 404
 };
 
-/*
- data = {
-    ws: 0,
-    gust: 0,
-    wdir: 0,
-    press: 0,
-    atemp: 0,
-    dew: 0,
-    hum: 0,
-    rain: 0
-};
-*/
-
 function populateUI(data) {
 	document.getElementById('ws').innerText = data.ws.toFixed(2);
 	document.getElementById('gust').innerText = data.gust.toFixed(2);
@@ -57,6 +44,7 @@ function populateUI(data) {
 	document.getElementById('dew').innerText = data.dew.toFixed(2);
 	document.getElementById('hum').innerText = data.hum.toFixed(2);
 	document.getElementById('rain').innerText = data.rain.toFixed(1);
+	document.getElementById('last-update').innerText = data.time;
 }
 
 function getWeatherData() {
