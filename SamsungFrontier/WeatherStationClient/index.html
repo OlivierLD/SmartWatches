@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="NMEA Client, for a REST Nav Server" />
+    <meta name="description" content="NMEA Client, for the Weather Station (See README for details)" />
 
     <title>NMEA Client</title>
 
@@ -129,7 +129,7 @@
                 <tr>
                     <td colspan="3">
                         <div class="scroll">
-                            <span id="last-update" title="Last updated, UTC Date"></span>
+                            <span id="last-update" title="Last updated, UTC Date">[last update]</span>
                             <br/>
                             Auto-scroll <input type="checkbox" onchange="manageClick(this);" />
                         </div>
@@ -141,27 +141,27 @@
 
     <script type="text/javascript">
         "use strict";
-        
+
             let auto = false;
-            
+
             	function manageClick(cb) {
             		auto = cb.checked;
             		if (auto) {
             			showSlides(slideIndex);
             		}
             	}
-            
+
             	let slideIndex = 1;
             	showSlides(slideIndex);
-            
+
             	function plusSlides(n) {
             		showSlides(slideIndex += n);
             	}
-            
+
             	function currentSlide(n) {
             		showSlides(slideIndex = n);
             	}
-            
+
             	function showSlides(n) {
             		let slides = document.getElementsByClassName("the-slides");
             		let dots = document.getElementsByClassName("dot");

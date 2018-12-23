@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="NMEA Client, for a minimal REST Nav Server" />
+
+    <title>Track Logger</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/ajax.manager.js"></script>
+    <script src="js/pub.sub.js"></script>
+    <script src="js/main.js"></script>
+
+    <script type="text/javascript">
+        "use strict";
+        		/**
+        		 *  SUBSCRIBERS HERE.
+        		 *
+        		 * Note: Event's definition (topic's name) is in ajax.manager.js, method onMessage
+        		 */
+        		events.subscribe('sog', function (val) {
+        			document.getElementById('sog').innerText = val.toFixed(2);
+        		});
+        		events.subscribe('cog', function (val) {
+        			document.getElementById('cog').innerText = val.toFixed(0);
+        		});
+        		events.subscribe('pos', function (val) {
+        			document.getElementById('lat').innerText = decToSex(val.lat, "NS");
+        			document.getElementById('lng').innerText = decToSex(val.lng, "EW");
+        		});
+        		events.subscribe('gps-time', function (val) {
+                let year = val.getFullYear();
+                let month = val.getMonth();
+                let date = val.getDate();
+                let hours = val.getHours();
+                let minutes = val.getMinutes();
+                let seconds = val.getSeconds();
+        
+        			document.getElementById('utc-1').innerText = year + '-' + (month < 9 ? '0' + (month + 1) : month + 1) + '-' + (date < 10 ? '0' + date : date);
+        			document.getElementById('utc-2').innerText = (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes) + ":" + (seconds < 10 ? '0' + seconds : seconds);
+        		});
+        		events.subscribe('sun-pos', function (val) {
+        			document.getElementById('sun-z').innerText = "Z " + val.z.toFixed(0) + String.fromCharCode(176);
+        			document.getElementById('sun-alt').innerText = "Alt " + toDegMin(val.alt);
+        			// And the azimuth on the graph here
+        			 plotTheSun(val.z);
+        		});
+        
+        		function decToSex(val, ns_ew) {
+        			let absVal = Math.abs(val);
+        			let intValue = Math.floor(absVal);
+        			let dec = absVal - intValue;
+        			let i = intValue;
+        			dec *= 60;
+        			//    let s = i + "°" + dec.toFixed(2) + "'";
+        			//    let s = i + String.fromCharCode(176) + dec.toFixed(2) + "'";
+        			let s = "";
+        			if (ns_ew !== undefined) {
+        				if (val < 0) {
+        					s += ns_ew === 'NS' ? 'S' : 'W';
+        				} else {
+        					s += ns_ew === 'NS' ? 'N' : 'E';
+        				}
+        
+        				s += " ";
+        			} else {
+        				if (val < 0) {
+        					s += '-';
+        				}
+        			}
+        			s += i + String.fromCharCode(176) + dec.toFixed(2) + "'";
+        			return s;
+        		}
+        
+        		function toDegMin(val) {
+        			let intValue = Math.floor(val);
+        			let dec = val - intValue;
+        			dec *= 60;
+        			return intValue + String.fromCharCode(176) + dec.toFixed(2) + "'";
+        		}
+    </script>
+</head>
+
+<body>
+    <div class=contents>
+        <div style='margin:auto;'>
+            <table border="0" style="margin: auto;">
+                <tr>
+                    <td colspan="3" style="min-height: 10px;">&nbsp;
+                        <br/>NMEA
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="prev" onclick="plusSlides(-1);">&#10094;</div>
+                    </td>
+                    <td>
+                        <div class="slideshow-container">
+                            <div class="the-slides fade">
+                                <div class="number-text">1 / 6</div>
+                                <div class="display">
+                                    <div class="display-title">Position</div>
+                                    <div class="display-data small-data">
+                                        <div id="lat">00&deg00.00'N</div>
+                                        <div id="lng">00&deg00.00'E</div>
+                                    </div>
+                                </div>
+                                <div class="text">POS</div>
+                            </div>
+
+                            <div class="the-slides fade">
+                                <div class="number-text">2 / 6</div>
+                                <div class="display">
+                                    <div class="display-title">Speed Over Ground</div>
+                                    <div class="display-data" id="sog">00.00</div>
+                                    <div class="display-unit">knots</div>
+                                </div>
+                                <div class="text">SOG</div>
+                            </div>
+
+                            <div class="the-slides fade">
+                                <div class="number-text">3 / 6</div>
+                                <div class="display">
+                                    <div class="display-title">Course Over Ground</div>
+                                    <div class="display-data" id="cog">000</div>
+                                    <div class="display-unit">degrees</div>
+                                </div>
+                                <div class="text">COG</div>
+                            </div>
+
+                            <div class="the-slides fade">
+                                <div class="number-text">4 / 6</div>
+                                <div class="display">
+                                    <div class="display-title">GPS Time</div>
+                                    <div class="display-data small-data">
+                                        <div id="utc-1">2018-12-21</div>
+                                        <div id="utc-2">00:00:00</div>
+                                    </div>
+                                </div>
+                                <div class="text">UTC</div>
+                            </div>
+
+                            <div class="the-slides fade">
+                                <div class="number-text">5 / 6</div>
+                                <div class="display">
+                                    <div class="display-title">Sun in the Sky</div>
+                                    <div class="display-data small-data">
+                                        <div id="sun-z">Z 000</div>
+                                        <div id="sun-alt">Alt 00.00&deg;</div>
+                                    </div>
+                                </div>
+                                <div class="text">SUN</div>
+                            </div>
+
+                            <div class="the-slides fade">
+                                <div class="number-text">6 / 6</div>
+                                <div class="display">
+                                    <div class="">
+                                        <canvas id="sun-canvas" width="150" height="150"></canvas>
+                                    </div>
+                                </div>
+                                <div class="text">Sun Z</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="next" onclick="plusSlides(1);">&#10095;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="dots">
+                            <span class="dot" onclick="currentSlide(1);" title="POS"></span>
+                            <span class="dot" onclick="currentSlide(2);" title="SOG"></span>
+                            <span class="dot" onclick="currentSlide(3);" title="COG"></span>
+                            <span class="dot" onclick="currentSlide(4);" title="UTC"></span>
+                            <span class="dot" onclick="currentSlide(5);" title="SUN"></span>
+                            <span class="dot" onclick="currentSlide(6);" title="Graph"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="scroll">
+                            Auto-scroll
+                            <input type="checkbox" onchange="manageClick(this);" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        "use strict";
+        
+        	let auto = false;
+        
+        	function manageClick(cb) {
+        		auto = cb.checked;
+        		if (auto) {
+        			showSlides(slideIndex);
+        		}
+        	}
+        
+        	let slideIndex = 1;
+        	showSlides(slideIndex);
+        
+        	function plusSlides(n) {
+        		showSlides(slideIndex += n);
+        	}
+        
+        	function currentSlide(n) {
+        		showSlides(slideIndex = n);
+        	}
+        
+        	function showSlides(n) {
+        		let slides = document.getElementsByClassName("the-slides");
+        		let dots = document.getElementsByClassName("dot");
+        		if (n > slides.length) {
+        			slideIndex = 1;
+        		}
+        		if (n < 1) {
+        			slideIndex = slides.length;
+        		}
+        		for (let i = 0; i < slides.length; i++) {
+        			//		slides[i].style.display = "none";
+        			slides[i].classList.remove("visible-slide");
+        		}
+        		if (!auto) {
+        			for (let i = 0; i < dots.length; i++) {
+        				dots[i].className = dots[i].className.replace(" active", "");
+        			}
+        			//				slides[slideIndex - 1].style.display = "block";
+        			slides[slideIndex - 1].classList.add("visible-slide"); // Show active one
+        			dots[slideIndex - 1].className += " active";
+        		} else { // Auto
+        			slideIndex++;
+        			if (slideIndex > slides.length) {
+        				slideIndex = 1
+        			}
+        			for (let i = 0; i < dots.length; i++) {
+        				dots[i].className = dots[i].className.replace(" active", "");
+        			}
+        			//				slides[slideIndex - 1].style.display = "block";
+        			slides[slideIndex - 1].classList.add("visible-slide"); // Show active one
+        			dots[slideIndex - 1].className += " active";
+        			setTimeout(showSlides, 5000); // Change screen every 5 seconds
+        		}
+        	}
+    </script>
+</body>
+
+</html>
