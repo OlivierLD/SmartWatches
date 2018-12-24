@@ -9,12 +9,18 @@
     <title>Track Logger</title>
 
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript">
+        "use strict";
+        let serverIp = "192.168.42.15";
+        let serverPort = 9999;
+    </script>
     <script src="js/ajax.manager.js"></script>
     <script src="js/pub.sub.js"></script>
     <script src="js/main.js"></script>
 
     <script type="text/javascript">
         "use strict";
+        
         		/**
         		 *  SUBSCRIBERS HERE.
         		 *
@@ -80,11 +86,38 @@
         			dec *= 60;
         			return intValue + String.fromCharCode(176) + dec.toFixed(2) + "'";
         		}
+        		
+        		function keyPadKey(char) {
+       		  console.info(">>", char);
+        		  let currentData = document.getElementById('screen-ip').innerText;
+        		  switch (char) {
+        		    case "Del":
+        		    	  currentData = currentData.substring(0, currentData.length - 1);
+        		    	  break;
+        		    case "Clr":
+        		      currentData = "";
+        		      break;
+        		    case "OK":
+        		      // TODO Validation
+        		      serverIp = currentData.substring(0, currentData.indexOf(':'));
+        		      serverPort = currentData.substring(currentData.indexOf(':') + 1);
+        		  //  console.log("Server & port:", serverIp, serverPort);
+        		      break; 
+        		    case "Cncl": 
+        		      currentData = serverIp + ':' + serverPort;
+        		      break;
+        		    default:
+        		    	  currentData += char;
+        		      break;
+        		  }
+        		  document.getElementById('screen-ip').innerText = currentData;
+        		}
     </script>
 </head>
 
 <body>
-    <div class=contents>
+    <div class=app-wrapper>
+        <!--  was contents -->
         <div style='margin:auto;'>
             <table border="0" style="margin: auto;">
                 <tr>
@@ -163,6 +196,44 @@
                                 </div>
                                 <div class="text">Sun Z</div>
                             </div>
+
+                            <div class="the-slides fade">
+                                <div class="display" style="width: 190px; height: 220px; padding-top: 5px;">
+
+                                    <div style="width: 190px; height: 20px; vertical-align: top; font-size: 10px; text-align: left; padding-left: 10px;"><span>Server IP &amp; port:</span>
+                                    </div>
+                                    <!-- screen -->
+                                    <div style="width: 190px; height: 30px; vertical-align: middle;"><span id="screen-ip">192.168.42.15:9999</span>
+                                    </div>
+                                    <!-- Numpad -->
+                                    <table style="width: 190px;">
+                                        <tr>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">1</td>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">2</td>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">3</td>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">4</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">5</td>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">6</td>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">7</td>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">8</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">9</td>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">0</td>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">.</td>
+                                            <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">:</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="keypad-button command-button col-4" onclick="keyPadKey(this.innerText);">Del</td>
+                                            <td class="keypad-button command-button col-4" onclick="keyPadKey(this.innerText);">Clr</td>
+                                            <td class="keypad-button command-button col-4" onclick="keyPadKey(this.innerText);">Cncl</td>
+                                            <td class="keypad-button command-button col-4" onclick="keyPadKey(this.innerText);">OK</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </td>
                     <td>
@@ -178,6 +249,7 @@
                             <span class="dot" onclick="currentSlide(4);" title="UTC"></span>
                             <span class="dot" onclick="currentSlide(5);" title="SUN"></span>
                             <span class="dot" onclick="currentSlide(6);" title="Graph"></span>
+                            <span class="dot" onclick="currentSlide(7);" title="Config"></span>
                         </div>
                     </td>
                 </tr>

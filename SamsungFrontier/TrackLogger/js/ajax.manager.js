@@ -6,7 +6,12 @@
 
 const DEBUG = false;
 
-const BASE_URL = "http://192.168.42.15:9999";
+// let getBaseURL() = "http://" + serverIp + ":9999";
+
+// serverIp, serverPort
+function getBaseURL() {
+	return "http://" + serverIp + ":" + serverPort;
+} 
 
 function initAjax() {
     let interval = setInterval(function() {
@@ -81,7 +86,7 @@ function getPromise(
 }
 
 function getNMEAData() {
-    return getPromise(BASE_URL + '/mux/cache', DEFAULT_TIMEOUT, 'GET', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/cache', DEFAULT_TIMEOUT, 'GET', 200, null, false);
 }
 
 function fetch() {
@@ -130,11 +135,11 @@ function getSunPos() {
 }
 
 function enableLogging(b) {
-    return getPromise(BASE_URL + '/mux/mux-process/' + (b === true ? 'on' : 'off'), DEFAULT_TIMEOUT, 'PUT', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/mux-process/' + (b === true ? 'on' : 'off'), DEFAULT_TIMEOUT, 'PUT', 200, null, false);
 }
 
 function setSpeedUnit(speedUnit) {
-    return getPromise(BASE_URL + '/mux/events/change-speed-unit', DEFAULT_TIMEOUT, 'POST', 200, {
+    return getPromise(getBaseURL() + '/mux/events/change-speed-unit', DEFAULT_TIMEOUT, 'POST', 200, {
         "speed-unit": speedUnit
     }, false);
 }
@@ -159,24 +164,24 @@ function forwarderStatus(callback) {
 }
 
 function resetDataCache() {
-    return getPromise(BASE_URL + '/mux/cache', DEFAULT_TIMEOUT, 'DELETE', 204);
+    return getPromise(getBaseURL() + '/mux/cache', DEFAULT_TIMEOUT, 'DELETE', 204);
 };
 
 function getForwarders() {
-    return getPromise(BASE_URL + '/mux/forwarders', DEFAULT_TIMEOUT, 'GET', 200);
+    return getPromise(getBaseURL() + '/mux/forwarders', DEFAULT_TIMEOUT, 'GET', 200);
 }
 
 function getLogFiles() {
-    return getPromise(BASE_URL + '/mux/log-files', DEFAULT_TIMEOUT, 'GET', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/log-files', DEFAULT_TIMEOUT, 'GET', 200, null, false);
 }
 
 // Should be useless..., invoke it directly (no promise required) to download.
 function getLogFile(fileName) {
-    return getPromise(BASE_URL + '/mux/log-files/' + fileName, DEFAULT_TIMEOUT, 'GET', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/log-files/' + fileName, DEFAULT_TIMEOUT, 'GET', 200, null, false);
 }
 
 function deleteLogFile(logFile) {
-    return getPromise(BASE_URL + '/mux/log-files/' + logFile, DEFAULT_TIMEOUT, 'DELETE', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/log-files/' + logFile, DEFAULT_TIMEOUT, 'DELETE', 200, null, false);
 }
 
 function getSystemTime() {
@@ -184,19 +189,19 @@ function getSystemTime() {
 }
 
 function getForwarderStatus() {
-    return getPromise(BASE_URL + '/mux/mux-process', DEFAULT_TIMEOUT, 'GET', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/mux-process', DEFAULT_TIMEOUT, 'GET', 200, null, false);
 }
 
 function getSOGCOG() {
-    return getPromise(BASE_URL + '/mux/sog-cog', DEFAULT_TIMEOUT, 'GET', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/sog-cog', DEFAULT_TIMEOUT, 'GET', 200, null, false);
 }
 
 function getDistance() {
-    return getPromise(BASE_URL + '/mux/distance', DEFAULT_TIMEOUT, 'GET', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/distance', DEFAULT_TIMEOUT, 'GET', 200, null, false);
 }
 
 function getDeltaAlt() {
-    return getPromise(BASE_URL + '/mux/delta-alt', DEFAULT_TIMEOUT, 'GET', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/delta-alt', DEFAULT_TIMEOUT, 'GET', 200, null, false);
 }
 
 /**
@@ -208,7 +213,7 @@ function getDeltaAlt() {
  * @returns {Promise<any>}
  */
 function getSkyGP(when, position, wandering, stars) {
-    let url = BASE_URL + "/astro/positions-in-the-sky";
+    let url = getBaseURL() + "/astro/positions-in-the-sky";
     // Add date
     url += ("?at=" + when);
     url += ("&fromL=" + position.lat);
@@ -247,7 +252,7 @@ function getAstroData(when, position, wandering, stars, callback) {
 }
 
 function setUTC(epoch) {
-    let url = BASE_URL + "/mux/utc";
+    let url = getBaseURL() + "/mux/utc";
     let obj = {
         epoch: epoch
     };
@@ -255,7 +260,7 @@ function setUTC(epoch) {
 }
 
 function setPosition(lat, lng) {
-    let url = BASE_URL + "/mux/position";
+    let url = getBaseURL() + "/mux/position";
     let obj = {
         lat: lat,
         lng: lng
