@@ -64,9 +64,9 @@ body {
 
 .visible-slide {
 	opacity: 1;
-	max-width: 194px;
+	max-width: 280px;
 	/*height: auto;*/
-	width: 194px;
+	width: 200px;
 	height: 230px;
 	transform: scaleX(1);
 	border: 2px solid orange;
@@ -76,7 +76,8 @@ body {
 /* Slideshow container */
 .slideshow-container {
 	max-width: 340px;
-	width: 194px;
+	max-height: 340px;
+	width: 200px;
 	height: 230px;
 	margin: auto;
 	text-align: center;
@@ -216,10 +217,10 @@ body {
 
 .keypad-button {
     background: #505050;
-    border: 1px solid #000;
-    border-radius: 3px;
+    border: 1px solid orange;
+    border-radius: 5px;
     text-align: center;
-    line-height: 36px;
+    line-height: 50px;
     font-size: 16px;
     font-weight: bold;
     color: #fff;

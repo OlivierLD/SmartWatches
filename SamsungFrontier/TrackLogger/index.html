@@ -102,6 +102,7 @@
         		      serverIp = currentData.substring(0, currentData.indexOf(':'));
         		      serverPort = currentData.substring(currentData.indexOf(':') + 1);
         		  //  console.log("Server & port:", serverIp, serverPort);
+        		  	  plusSlides(+1);
         		      break; 
         		    case "Cncl": 
         		      currentData = serverIp + ':' + serverPort;
@@ -118,8 +119,8 @@
 <body>
     <div class=app-wrapper>
         <!--  was contents -->
-        <div style='margin:auto;'>
-            <table border="0" style="margin: auto;">
+        <div style='margin: auto;'>
+            <table border="0" style="text-align: center; margin: auto;">
                 <tr>
                     <td colspan="3" style="min-height: 10px;">&nbsp;
                         <br/>NMEA
@@ -197,8 +198,8 @@
                                 <div class="text">Sun Z</div>
                             </div>
 
-                            <div class="the-slides fade">
-                                <div class="display" style="width: 190px; height: 220px; padding-top: 5px;">
+                            <div class="the-slides fade" style="width: 200px; height: 280px; padding-top: 5px;">
+                                <div class="display" style="width: 200px; height: 280px; padding-top: 5px;">
 
                                     <div style="width: 190px; height: 20px; vertical-align: top; font-size: 10px; text-align: left; padding-left: 10px;"><span>Server IP &amp; port:</span>
                                     </div>
@@ -206,7 +207,7 @@
                                     <div style="width: 190px; height: 30px; vertical-align: middle;"><span id="screen-ip">192.168.42.15:9999</span>
                                     </div>
                                     <!-- Numpad -->
-                                    <table style="width: 190px;">
+                                    <table style="width: 200px;">
                                         <tr>
                                             <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">1</td>
                                             <td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">2</td>
@@ -242,7 +243,7 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <div class="dots">
+                        <div class="dots" id="dots">
                             <span class="dot" onclick="currentSlide(1);" title="POS"></span>
                             <span class="dot" onclick="currentSlide(2);" title="SOG"></span>
                             <span class="dot" onclick="currentSlide(3);" title="COG"></span>
@@ -255,7 +256,7 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <div class="scroll">
+                        <div class="scroll" id="auto-scroll">
                             Auto-scroll
                             <input type="checkbox" onchange="manageClick(this);" />
                         </div>
@@ -308,9 +309,17 @@
         			//				slides[slideIndex - 1].style.display = "block";
         			slides[slideIndex - 1].classList.add("visible-slide"); // Show active one
         			dots[slideIndex - 1].className += " active";
+        			
+        			if (slideIndex === 7) { // Numpad
+        			  document.getElementById('dots').style.display = 'none';
+        			  document.getElementById('auto-scroll').style.display = 'none';
+        			} else {
+        			  document.getElementById('dots').style.display = 'block';
+        			  document.getElementById('auto-scroll').style.display = 'block';
+        			}
         		} else { // Auto
         			slideIndex++;
-        			if (slideIndex > slides.length) {
+        			if (slideIndex > slides.length || slideIndex === 7) { // Skip numpad in auto mod
         				slideIndex = 1
         			}
         			for (let i = 0; i < dots.length; i++) {
