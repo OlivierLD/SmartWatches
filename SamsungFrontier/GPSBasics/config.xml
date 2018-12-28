@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/GPSBasics" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="TXzCnhYLx0.GPSBasics" package="TXzCnhYLx0" required_version="3.0"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <feature name="tizen.org/feature/location.gps"/>
+    <icon src="gps.2.png"/>
+    <name>GPS Basics</name>
+    <tizen:privilege name="http://tizen.org/privilege/location"/>
+    <tizen:profile name="wearable"/>
+</widget>
