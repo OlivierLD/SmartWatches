@@ -41,8 +41,19 @@ function onPosSuccess(pos) {
     console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude);
     console.log('hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
 //  console.log("Pos data:" + pos.coords); 
-    let newContent = decToSex(pos.coords.latitude, 'NS') + "<br/>" +
-        decToSex(pos.coords.longitude, 'EW');
+    let hdg = 0;
+    let speed = 0.0;
+    try {
+    	  hdg = pos.coords.heading.toFixed(0);
+    	  speed = pos.coords.speed.toFixed(2);
+    } catch (err) {}
+    let newContent = 
+    	decToSex(pos.coords.latitude, 'NS') + "<br/>" +
+        decToSex(pos.coords.longitude, 'EW') + "<br/>" +
+        'HDG= ' + hdg + '<br/>' +
+        'SPD= ' + speed + ' m/s';
+
+        
     let box = document.querySelector('#textbox');
     box.innerHTML = newContent;
 }
