@@ -2,7 +2,7 @@
 Smart watches and wearable applications
 
 ### Pebble
-Was acquired by Fitbit. My [Pebble repo](https://github.com/OlivierLD/pebble) is still here, but might not be there forever.
+Was acquired by Fitbit. My Pebble repo was moved [here](./pebble), for archiving purpose.
 
 ### Samsung Frontier
 #### To get started
@@ -69,8 +69,10 @@ Here is a way to make a REST GET request to some external resource:
 ```
 
 Make sure you use `"use strict";` if you need to use ES6 syntax.
+The IDE seems not to like it (shows syntax like `() => { ... }` as errored, but works OK, apparently.
 
 As it is a Web Application, your browser's Developer tools are available in `debug` mode. Very cool.
 
 #### To check
 - Web Socket availability?
+- Web Components support for HTML/JS/CSS apps?
