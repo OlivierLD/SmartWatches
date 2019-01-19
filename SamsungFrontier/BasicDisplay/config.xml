@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/BasicDisplay" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="Icsvtxbt4W.BasicDisplay" package="Icsvtxbt4W" required_version="3.0"/>
+    <author email="olivier@lediouris.net">Olivier LeDIouris</author>
+    <content src="index.html"/>
+    <description>Basic round display with one hand.
+Provided as an example, to be re-used.
+Rotate the rotary (the ring around the watch) to change the display value.</description>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="pelican.icon.png"/>
+    <license>MIT</license>
+    <name>BasicDisplay</name>
+    <tizen:profile name="wearable"/>
+</widget>

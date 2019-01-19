@@ -36,7 +36,7 @@ function onPosSuccess(pos) {
 	// Doc at https://w3c.github.io/geolocation-api/
 	// Positon object at https://w3c.github.io/geolocation-api/#position_interface
 	//
-	// Check proivileges in config.xml
+	// Check privileges in config.xml
 	//
     console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude);
     console.log('hdg= ' + pos.coords.heading + ' spd= ' + pos.coords.speed + ' m/s');
@@ -52,8 +52,6 @@ function onPosSuccess(pos) {
         decToSex(pos.coords.longitude, 'EW') + "<br/>" +
         'HDG= ' + hdg + '<br/>' +
         'SPD= ' + speed + ' m/s';
-
-        
     let box = document.querySelector('#textbox');
     box.innerHTML = newContent;
 }
