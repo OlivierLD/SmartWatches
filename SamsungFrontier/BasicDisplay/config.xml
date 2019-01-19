@@ -9,6 +9,6 @@ Rotate the rotary (the ring around the watch) to change the display value.</desc
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <icon src="pelican.icon.png"/>
     <license>MIT</license>
-    <name>BasicDisplay</name>
+    <name>Basic Analog Display</name>
     <tizen:profile name="wearable"/>
 </widget>
