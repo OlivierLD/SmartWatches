@@ -208,7 +208,7 @@ function AnalogDisplay(cName,                     // Canvas Name
 	let scale = dSize / 100;
 
 	let canvasName = cName;
-	let displaySize = dSize;
+	let displaySize = dSize; // Radius
 
 	let running = false;
 	let previousValue = startValue;
@@ -352,8 +352,7 @@ function AnalogDisplay(cName,                     // Canvas Name
 
 		if (withBorder === true) {
 			//  context.arc(x, y, radius, startAngle, startAngle + Math.PI, antiClockwise);
-//    context.arc(canvas.width / 2, radius + 10, radius, Math.PI - toRadians(overlapOver180InDegree), (2 * Math.PI) + toRadians(overlapOver180InDegree), false);
-			context.arc(canvas.width / 2, radius + 10, radius, Math.PI - Math.toRadians(overlapOver180InDegree > 0 ? 90 : 0), (2 * Math.PI) + Math.toRadians(overlapOver180InDegree > 0 ? 90 : 0), false);
+			context.arc(canvas.width / 2, canvas.height / 2, radius, Math.PI - Math.toRadians(overlapOver180InDegree > 0 ? 90 : 0), (2 * Math.PI) + Math.toRadians(overlapOver180InDegree > 0 ? 90 : 0), false);
 			context.lineWidth = 5;
 		}
 
@@ -390,8 +389,8 @@ function AnalogDisplay(cName,                     // Canvas Name
 			let ___maxAngle = (totalAngle * ((maxiVal - startValue) / (maxValue - startValue))) - Math.toRadians(overlapOver180InDegree) - (Math.PI);
 
 			//Center
-			context.moveTo(canvas.width / 2, radius + 10);
-			context.arc(canvas.width / 2, radius + 10, radius * 0.75,
+			context.moveTo(canvas.width / 2, canvas.height / 2);
+			context.arc(canvas.width / 2, canvas.height / 2, radius * 0.75,
 					(___minAngle),
 					(___maxAngle),
 					false);
@@ -410,9 +409,9 @@ function AnalogDisplay(cName,                     // Canvas Name
 		for (let i = 0; i <= (maxValue - startValue); i += majorTicks) {
 			let currentAngle = (totalAngle * (i / (maxValue - startValue))) - Math.toRadians(overlapOver180InDegree);
 			let xFrom = (canvas.width / 2) - ((radius * 0.95) * Math.cos(currentAngle));
-			let yFrom = (radius + 10) - ((radius * 0.95) * Math.sin(currentAngle));
+			let yFrom = (canvas.height / 2) - ((radius * 0.95) * Math.sin(currentAngle));
 			let xTo = (canvas.width / 2) - ((radius * 0.85) * Math.cos(currentAngle));
-			let yTo = (radius + 10) - ((radius * 0.85) * Math.sin(currentAngle));
+			let yTo = (canvas.height / 2) - ((radius * 0.85) * Math.sin(currentAngle));
 			context.moveTo(xFrom, yFrom);
 			context.lineTo(xTo, yTo);
 		}
@@ -428,9 +427,9 @@ function AnalogDisplay(cName,                     // Canvas Name
 				let _currentAngle = (totalAngle * (i / (maxValue - startValue))) - Math.toRadians(overlapOver180InDegree);
 
 				let xFrom = (canvas.width / 2) - ((radius * 0.95) * Math.cos(_currentAngle));
-				let yFrom = (radius + 10) - ((radius * 0.95) * Math.sin(_currentAngle));
+				let yFrom = (canvas.height / 2) - ((radius * 0.95) * Math.sin(_currentAngle));
 				let xTo = (canvas.width / 2) - ((radius * 0.90) * Math.cos(_currentAngle));
-				let yTo = (radius + 10) - ((radius * 0.90) * Math.sin(_currentAngle));
+				let yTo = (canvas.height / 2) - ((radius * 0.90) * Math.sin(_currentAngle));
 				context.moveTo(xFrom, yFrom);
 				context.lineTo(xTo, yTo);
 			}
@@ -445,7 +444,7 @@ function AnalogDisplay(cName,                     // Canvas Name
 			context.beginPath();
 			for (let i = 0; i <= (maxValue - startValue); i += majorTicks) {
 				context.save();
-				context.translate(canvas.width / 2, (radius + 10)); // canvas.height);
+				context.translate(canvas.width / 2, (canvas.height / 2)); // canvas.height);
 				let __currentAngle = (totalAngle * (i / (maxValue - startValue))) - Math.toRadians(overlapOver180InDegree);
 //      context.rotate((Math.PI * (i / maxValue)) - (Math.PI / 2));
 				context.rotate(__currentAngle - (Math.PI / 2));
@@ -563,20 +562,20 @@ function AnalogDisplay(cName,                     // Canvas Name
 			context.shadowBlur = 3;
 		}
 		// Center
-		context.moveTo(canvas.width / 2, radius + 10);
+		context.moveTo(canvas.width / 2, canvas.height / 2);
 
 		let ___currentAngle = (totalAngle * ((displayValue - startValue) / (maxValue - startValue))) - Math.toRadians(overlapOver180InDegree);
 		// Left
 		let x = (canvas.width / 2) - ((radius * 0.05) * Math.cos((___currentAngle - (Math.PI / 2))));
-		let y = (radius + 10) - ((radius * 0.05) * Math.sin((___currentAngle - (Math.PI / 2))));
+		let y = (canvas.height / 2) - ((radius * 0.05) * Math.sin((___currentAngle - (Math.PI / 2))));
 		context.lineTo(x, y);
 		// Tip
 		x = (canvas.width / 2) - ((radius * 0.90) * Math.cos(___currentAngle));
-		y = (radius + 10) - ((radius * 0.90) * Math.sin(___currentAngle));
+		y = (canvas.height / 2) - ((radius * 0.90) * Math.sin(___currentAngle));
 		context.lineTo(x, y);
 		// Right
 		x = (canvas.width / 2) - ((radius * 0.05) * Math.cos((___currentAngle + (Math.PI / 2))));
-		y = (radius + 10) - ((radius * 0.05) * Math.sin((___currentAngle + (Math.PI / 2))));
+		y = (canvas.height / 2) - ((radius * 0.05) * Math.sin((___currentAngle + (Math.PI / 2))));
 		context.lineTo(x, y);
 
 		context.closePath();
@@ -587,7 +586,7 @@ function AnalogDisplay(cName,                     // Canvas Name
 		context.stroke();
 		// Knob
 		context.beginPath();
-		context.arc((canvas.width / 2), (radius + 10), 7, 0, 2 * Math.PI, false);
+		context.arc((canvas.width / 2), (canvas.height / 2), 7, 0, 2 * Math.PI, false);
 		context.closePath();
 		context.fillStyle = analogDisplayColorConfig.knobColor;
 		context.fill();

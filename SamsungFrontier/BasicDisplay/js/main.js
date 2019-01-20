@@ -51,6 +51,6 @@ window.onload = () => {
 
     document.addEventListener("rotarydetent", rotEventHandler);
 
-    displayBSP = new AnalogDisplay('bspCanvas', 175, 15, 1, 0.1, true, 40);
+    displayBSP = new AnalogDisplay('bspCanvas', 173, 15, 1, 0.1, true, 40);
     displayBSP.setValue(0);
 };
