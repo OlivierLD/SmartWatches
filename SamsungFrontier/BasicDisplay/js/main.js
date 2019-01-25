@@ -53,4 +53,5 @@ window.onload = () => {
 
     displayBSP = new AnalogDisplay('bspCanvas', 173, 15, 1, 0.1, true, 40);
     displayBSP.setValue(0);
+    displayBSP.setLabel('BSP');
 };
