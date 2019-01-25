@@ -2,9 +2,19 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/TrackLogger" version="1.0.0" viewmodes="maximized">
     <access origin="*" subdomains="true"></access>
     <tizen:application id="msHFyZDsTr.TrackLogger" package="msHFyZDsTr" required_version="3.0"/>
+    <author email="olivier@lediouris.net">Olivier LeDiouris</author>
     <content src="index.html"/>
+    <description>Several diaplays (character display mostly, on analog).
+- Position
+- SOG
+- COG
+- GPS Time
+- Sun in the Sky
+- Sun azimuth (analog)
+- Server IP Address form</description>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <icon src="kayak.png"/>
+    <license>MIT</license>
     <name>Track Logger</name>
     <tizen:privilege name="http://tizen.org/privilege/internet"/>
     <tizen:profile name="wearable"/>

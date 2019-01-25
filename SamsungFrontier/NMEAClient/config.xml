@@ -6,7 +6,9 @@
     <content src="index.html"/>
     <description>Samsung Frontier client for the REST Nav Server or NMEA.multiplexer.
 See https://github.com/OlivierLD/raspberry-coffee/tree/master/NMEA.multiplexer
-and https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTNavServer</description>
+and https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTNavServer
+
+Several panel, all character (no analog, yet).</description>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <icon src="navigation.icon.png"/>
     <license>MIT</license>
