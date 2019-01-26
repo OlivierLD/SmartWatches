@@ -5,6 +5,7 @@
 body {
     margin: 2px auto;
     background-color:#222;
+    color: white;
 }
 
 .contents {
@@ -15,7 +16,6 @@ body {
 	height:360px;
 	width: 360px;
 }
-
 
 .content_text {
 	font-weight:bold;
@@ -37,23 +37,33 @@ body {
 	overflow: hidden;
 }
 
+.text-slide {
+	padding-top: 80px;
+	height: 280px;	
+}
+
+.display {
+	font-size: 30px;
+	margin: 20px;
+}
+
 .visible-slide {
 	opacity: 1;
-	max-width: 280px;
+	max-width: 360px;
 	/*height: auto;*/
-	width: 200px;
-	height: 230px;
+	width: 360px;
+	height: 360px;
 	transform: scaleX(1);
-	border: 2px solid orange;
-	border-radius: 10px;
+	/* border: 2px solid orange;
+	border-radius: 10px; */
 }
 
 /* Slideshow container */
 .slideshow-container {
-	max-width: 340px;
-	max-height: 340px;
-	width: 200px;
-	height: 230px;
+	max-width: 360px;
+	max-height: 360px;
+	width: 360px;
+	height: 360px;
 	margin: auto;
 	text-align: center;
 	padding: 0;

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<meta name="description" content="NMEA Client, for a minimal REST Nav Server. Analog Displays"/>
+
+	<title>Track Logger v2</title>
+
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script type="text/javascript">
+		"use strict";
+
+		let serverIp = "192.168.42.5";
+		let serverPort = 9999;
+	</script>
+	<script src="js/AnalogDisplay.js"></script>
+	<!-- SOG  -->
+	<script src="js/CircularCompass.js"></script>
+	<!-- COG -->
+	<script src="js/Direction.js"></script>
+	<!-- Sun position -->
+
+	<script src="js/ajax.manager.js"></script>
+	<script src="js/pub.sub.js"></script>
+	<script src="js/main.js"></script>
+
+	<script type="text/javascript">
+		"use strict";
+
+		var displayCOG;
+		var displaySOG;
+
+		var displaySunPos;
+
+		/**
+		 *  SUBSCRIBERS HERE.
+		 *
+		 * Note: Events definition (topic's name) is in ajax.manager.js, method onMessage
+		 */
+		events.subscribe('sog', function (val) {
+			displaySOG.setValue(val);
+		});
+		events.subscribe('cog', function (val) {
+			displayCOG.setValue(val);
+		});
+		events.subscribe('pos', function (val) {
+			document.getElementById('lat').innerText = decToSex(val.lat, "NS");
+			document.getElementById('lng').innerText = decToSex(val.lng, "EW");
+		});
+		events.subscribe('gps-time', function (val) {
+			let year = val.getFullYear();
+			let month = val.getMonth();
+			let date = val.getDate();
+			let hours = val.getHours();
+			let minutes = val.getMinutes();
+			let seconds = val.getSeconds();
+
+			document.getElementById('utc-1').innerText = year + '-' + (month < 9 ? '0' + (month + 1) : month + 1) + '-' + (date < 10 ? '0' + date : date);
+			document.getElementById('utc-2').innerText = (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes) + ":" + (seconds < 10 ? '0' + seconds : seconds);
+		});
+		events.subscribe('sun-pos', function (val) {
+			document.getElementById('sun-z').innerText = "Z " + val.z.toFixed(0) + String.fromCharCode(176);
+			document.getElementById('sun-alt').innerText = "Alt " + toDegMin(val.alt);
+			// And the azimuth on the display here
+			displaySunPos.setValue(val.z);
+		});
+
+		function decToSex(val, ns_ew) {
+			let absVal = Math.abs(val);
+			let intValue = Math.floor(absVal);
+			let dec = absVal - intValue;
+			let i = intValue;
+			dec *= 60;
+			//    let s = i + "°" + dec.toFixed(2) + "'";
+			//    let s = i + String.fromCharCode(176) + dec.toFixed(2) + "'";
+			let s = "";
+			if (ns_ew !== undefined) {
+				if (val < 0) {
+					s += ns_ew === 'NS' ? 'S' : 'W';
+				} else {
+					s += ns_ew === 'NS' ? 'N' : 'E';
+				}
+				s += " ";
+			} else {
+				if (val < 0) {
+					s += '-';
+				}
+			}
+			s += i + String.fromCharCode(176) + dec.toFixed(2) + "'";
+			return s;
+		}
+
+		function toDegMin(val) {
+			let intValue = Math.floor(val);
+			let dec = val - intValue;
+			dec *= 60;
+			return intValue + String.fromCharCode(176) + dec.toFixed(2) + "'";
+		}
+
+		function keyPadKey(char) {
+			console.info(">>", char);
+			let currentData = document.getElementById('screen-ip').innerText;
+			switch (char) {
+				case "Del":
+					currentData = currentData.substring(0, currentData.length - 1);
+					break;
+				case "Clr":
+					currentData = "";
+					break;
+				case "OK":
+					// TODO Validation
+					serverIp = currentData.substring(0, currentData.indexOf(':'));
+					serverPort = currentData.substring(currentData.indexOf(':') + 1);
+					//  console.log("Server & port:", serverIp, serverPort);
+					flipSlides(+1);
+					break;
+				case "Cncl":
+					currentData = serverIp + ':' + serverPort;
+					break;
+				default:
+					currentData += char;
+					break;
+			}
+			document.getElementById('screen-ip').innerText = currentData;
+		}
+
+		window.onload = () => {
+
+			displaySOG = new AnalogDisplay('sogCanvas', 173, 10, 1, 0.1, true, 40); // 173: ((350/2) - 2)
+			displaySOG.setValue(0);
+			displaySOG.setLabel('SOG');
+			displaySOG.repaint();
+
+			displaySunPos = new Direction('sunCanvas', 173, 45, 5, true); // 173: ((350/2) - 2)
+			displaySunPos.setValue(0);
+			displaySunPos.setLabel('SunZ');
+			displaySunPos.repaint();
+
+			displayCOG = new CircularCompass('cogCanvas', 173, 45, 1, true); // 173: ((350/2) - 2)
+			displayCOG.setValue(0);
+			displayCOG.setLabel('COG');
+			displayCOG.repaint();
+
+			document.getElementById('screen-ip').innerText = serverIp + ':' + serverPort;
+
+			initMain();
+		};
+	</script>
+</head>
+
+<body>
+<div class=app-wrapper>
+	<!--  was contents -->
+	<div style='margin: auto;'>
+		<div class="slideshow-container">
+			<div class="the-slides fade">
+				<div class="text-slide">
+					<div class="number-text">1 / 6</div>
+					<div class="display">
+						<div class="display-title">Position</div>
+						<div class="display-data small-data">
+							<div id="lat">00&deg;00.00'N</div>
+							<div id="lng">00&deg;00.00'E</div>
+						</div>
+					</div>
+					<div class="text">POS</div>
+				</div>
+			</div>
+
+			<div class="the-slides fade">
+				<!-- SOG -->
+				<canvas id="sogCanvas" class="displayContent" width="350" height="350" title="Speed Over Ground"></canvas>
+
+			</div>
+
+			<div class="the-slides fade">
+				<!-- COG -->
+				<canvas id="cogCanvas" class="displayContent" width="350" height="350" title="Course Over Ground"></canvas>
+			</div>
+
+			<div class="the-slides fade">
+				<div class="text-slide">
+					<div class="number-text">4 / 6</div>
+					<div class="display">
+						<div class="display-title">GPS Time</div>
+						<div class="display-data small-data">
+							<div id="utc-1">2018-12-21</div>
+							<div id="utc-2">00:00:00</div>
+						</div>
+					</div>
+					<div class="text">UTC</div>
+				</div>
+			</div>
+
+			<div class="the-slides fade">
+				<div class="text-slide">
+					<div class="number-text">5 / 6</div>
+					<div class="display">
+						<div class="display-title">Sun in the Sky</div>
+						<div class="display-data small-data">
+							<div id="sun-z">Z 000</div>
+							<div id="sun-alt">Alt 00.00&deg;</div>
+						</div>
+					</div>
+					<div class="text">SUN</div>
+				</div>
+			</div>
+
+			<div class="the-slides fade">
+				<!-- Sun Z -->
+				<canvas id="sunCanvas" class="displayContent" width="350" height="350" title="Sun Azimuth"></canvas>
+			</div>
+
+			<div class="the-slides fade">
+				<div class="text-slide">
+					<div style="margin: -40px 0 0 80px;"> <!--  class="display" -->
+
+						<div
+								style="width: 190px; height: 20px; vertical-align: top; font-size: 10px; text-align: center; padding-left: 10px;">
+							<span>Server IP &amp; port:</span>
+						</div>
+						<!-- screen -->
+						<div style="width: 190px; height: 30px; vertical-align: middle;"><span
+								id="screen-ip">192.168.42.15:9999</span>
+						</div>
+						<!-- Numpad -->
+						<table style="width: 200px;">
+							<tr>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">1</td>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">2</td>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">3</td>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">4</td>
+							</tr>
+							<tr>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">5</td>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">6</td>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">7</td>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">8</td>
+							</tr>
+							<tr>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">9</td>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">0</td>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">.</td>
+								<td class="keypad-button col-4" onclick="keyPadKey(this.innerText);">:</td>
+							</tr>
+							<tr>
+								<td class="keypad-button command-button col-4" onclick="keyPadKey(this.innerText);">Del</td>
+								<td class="keypad-button command-button col-4" onclick="keyPadKey(this.innerText);">Clr</td>
+								<td class="keypad-button command-button col-4" onclick="keyPadKey(this.innerText);">Cncl</td>
+								<td class="keypad-button command-button col-4" onclick="keyPadKey(this.innerText);">OK</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- div id="for-debug" style="margin: 5px; text-align: center;">
+				<button onclick="flipSlides(-1);">&lt;</button>
+				<button onclick="flipSlides(+1);">&gt;</button>
+		</div -->
+	</div>
+</div>
+
+<script type="text/javascript">
+	"use strict";
+
+	let slideIndex = 1;
+	showSlides(slideIndex);
+
+	function flipSlides(n) {
+		showSlides(slideIndex += n);
+	}
+
+	function currentSlide(n) {
+		showSlides(slideIndex = n);
+	}
+
+	function showSlides(n) {
+		let slides = document.getElementsByClassName("the-slides");
+		if (n > slides.length) {
+			slideIndex = 1;
+		}
+		if (n < 1) {
+			slideIndex = slides.length;
+		}
+		for (let i = 0; i < slides.length; i++) {
+			slides[i].classList.remove("visible-slide");
+		}
+		slides[slideIndex - 1].classList.add("visible-slide"); // Show active one
+	}
+</script>
+</body>
+
+</html>

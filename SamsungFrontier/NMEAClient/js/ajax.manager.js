@@ -57,7 +57,7 @@ function getPromise(
 
 		let requestTimer = setTimeout(function () {
 			xhr.abort();
-			let mess = { code: 408, message: 'Timeout' };
+			let mess = {code: 408, message: 'Timeout'};
 			reject(mess);
 		}, TIMEOUT);
 
@@ -66,7 +66,7 @@ function getPromise(
 			if (xhr.status === happyCode) {
 				resolve(xhr.response);
 			} else {
-				reject({ code: xhr.status, message: xhr.response });
+				reject({code: xhr.status, message: xhr.response});
 			}
 		};
 	});
@@ -257,7 +257,7 @@ function onMessage(json) {
 			let buffered = json['Current calculated with damping'];
 			if (buffered !== undefined) {
 				let keys = Object.keys(buffered);
-				for (let i=0; i<keys.length; i++) {
+				for (let i = 0; i < keys.length; i++) {
 					let k = keys[i];
 //				console.log("K:" + k);
 					let damp = buffered[k];

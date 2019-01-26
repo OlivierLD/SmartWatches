@@ -35,6 +35,16 @@ The rotary detent can be used to change screen, like the left and right arrows a
 |:----:|:---:|
 |![Apps](./docimg/watch.01.jpg)|![BSP](./docimg/watch.02.jpg)|
 
+
+### NMEA Client ⛵
+#### WIP 🚧 REST Client for the Nav Server, V2.
+
+| POS | SOG | COG | Sun Pos | Sun Z | Server IP |
+|:----:|:---:|:---:|:---:|:---:|:---:|
+|![Apps](./docimg/trackv2.pos.png)|![BSP](./docimg/trackv2.sog.png)|![AWS](./docimg/trackv2.compass.png)|![SOG](./docimg/trackv2.sun.pos.png)|![SOG](./docimg/trackv2.sun.z.png)|![SOG](./docimg/trackv2.ip.png)|
+
+The rotary detent can be used to change screen, like the left and right arrows and swipes on the screen.
+
 ---
 
 ### TODO
