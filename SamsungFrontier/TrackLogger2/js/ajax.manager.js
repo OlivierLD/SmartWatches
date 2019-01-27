@@ -14,7 +14,7 @@ function getBaseURL() {
 }
 
 function initAjax() {
-	let interval = setInterval(function () {
+	let interval = setInterval(() => {
 		fetch();
 		getSunPos(); // To display the position of the sun in the sky, at your position, at your time.
 	}, 1000);

@@ -136,6 +136,16 @@
 			displaySunPos = new Direction('sunCanvas', 173, 45, 5, true); // 173: ((350/2) - 2)
 			displaySunPos.setValue(0);
 			displaySunPos.setLabel('SunZ');
+			displaySunPos.setCbAfter((context, radius, displayValue, tipPos) => {
+//			console.log('Display Value in the callback:', displayValue);
+				context.beginPath();
+				context.arc(tipPos.x, tipPos.y, 10, 0, 2 * Math.PI, false);
+				context.closePath();
+				context.fillStyle = 'yellow';
+				context.fill();
+				context.strokeStyle = 'orange';
+				context.stroke();
+			});
 			displaySunPos.repaint();
 
 			displayCOG = new CircularCompass('cogCanvas', 173, 45, 1, true); // 173: ((350/2) - 2)

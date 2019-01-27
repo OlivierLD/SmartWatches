@@ -21,7 +21,7 @@ Drive a Relay connected to a Raspberry Pi.
 |![Apps](./docimg/weather.station.01.png)|![Apps](./docimg/weather.station.02.png)|
 
 ### NMEA Client ⛵
-#### WIP 🚧 REST Client for the Nav Server.
+#### <!-- WIP 🚧 --> REST Client for the Nav Server.
 
 | Apps | BSP | AWS | SOG |
 |:----:|:---:|:---:|:---:|
@@ -37,7 +37,7 @@ The rotary detent can be used to change screen, like the left and right arrows a
 
 
 ### NMEA Client ⛵
-#### WIP 🚧 REST Client for the Nav Server, V2.
+#### <!-- WIP 🚧 --> REST Client for the Nav Server, V2.
 
 | POS | SOG | COG | Sun Pos | Sun Z | Server IP |
 |:----:|:---:|:---:|:---:|:---:|:---:|
@@ -48,7 +48,7 @@ The rotary detent can be used to change screen, like the left and right arrows a
 ---
 
 ### TODO
-- GPS Location 🛰️
+- GPS Location 🛰️. Done &#9989;.
 - Street Cleaning 🚗
 
 ---

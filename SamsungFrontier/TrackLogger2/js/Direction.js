@@ -177,11 +177,20 @@ function Direction(cName, dSize, majorTicks, minorTicks, withRose, windArrow) {
 	let label;
 	let instance = this;
 
+	let cbBefore, cbAfter;
+
 	this.setDisplaySize = function (ds) {
 		scale = ds / 100;
 		displaySize = ds;
 		this.drawDisplay(canvasName, displaySize, instance.previousValue);
 	};
+
+	this.setCbBefore = function(cb) {
+		cbBefore = cb;
+	}
+	this.setCbAfter = function(cb) {
+		cbAfter = cb;
+	}
 
 	this.repaint = function () {
 		this.drawDisplay(canvasName, displaySize, this.previousValue);
@@ -227,6 +236,10 @@ function Direction(cName, dSize, majorTicks, minorTicks, withRose, windArrow) {
 		// Cleanup
 		context.fillStyle = directionColorConfig.bgColor;
 		context.fillRect(0, 0, canvas.width, canvas.height);
+
+		if (cbBefore !== undefined) {
+			// TODO Implement
+		}
 
 		context.beginPath();
 		if (withBorder === true) {
@@ -486,6 +499,13 @@ function Direction(cName, dSize, majorTicks, minorTicks, withRose, windArrow) {
 		context.fill();
 		context.strokeStyle = directionColorConfig.knobOutlineColor;
 		context.stroke();
+
+		if (cbAfter !== undefined) {
+			x = (canvas.width / 2) - ((radius * 0.90) * Math.cos(2 * Math.PI * (displayValue / 360) + (Math.PI / 2)));
+			y = (canvas.height / 2) - ((radius * 0.90) * Math.sin(2 * Math.PI * (displayValue / 360) + (Math.PI / 2)));
+			cbAfter(context, radius, displayValue, { x: x, y: y });
+		}
+
 	};
 
 	this.drawSpike = function (canvas, radius, outsideRadius, insideRadius, angle, context) {
