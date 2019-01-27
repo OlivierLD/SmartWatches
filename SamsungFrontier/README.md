@@ -21,7 +21,7 @@ Drive a Relay connected to a Raspberry Pi.
 |![Apps](./docimg/weather.station.01.png)|![Apps](./docimg/weather.station.02.png)|
 
 ### NMEA Client ⛵
-#### <!-- WIP 🚧 --> REST Client for the Nav Server.
+#### <!-- WIP 🚧 --> REST Client for the [Nav Server](https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTNavServer).
 
 | Apps | BSP | AWS | SOG |
 |:----:|:---:|:---:|:---:|
@@ -37,7 +37,7 @@ The rotary detent can be used to change screen, like the left and right arrows a
 
 
 ### NMEA Client ⛵
-#### <!-- WIP 🚧 --> REST Client for the Nav Server, V2.
+#### <!-- WIP 🚧 --> REST Client for the [Nav Server](https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTNavServer), V2.
 
 | POS | SOG | COG | Sun Pos | Sun Z | Server IP |
 |:----:|:---:|:---:|:---:|:---:|:---:|
@@ -46,6 +46,9 @@ The rotary detent can be used to change screen, like the left and right arrows a
 The rotary detent can be used to change screen, as well as left and right swipes on the screen.
 
 `Sun Z` stands for "Sun's Azimuth". If you point the needle to the Sun, you know where the North is 😜.
+
+This is a configuration I like for kayaking. There is a logger ([RESTNavServer](https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTNavServer)) running on a `Raspberry Pi Zero W` in a waterproof box, and this is like a dashboard,
+you can see what you're doing. [Here](http://hocus-blogus.blogspot.com/2018/11/thanksgiving-kayaking-in-drakes-estero.html) is an example of such a logging.
 
 ---
 
