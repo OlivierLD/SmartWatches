@@ -43,7 +43,9 @@ The rotary detent can be used to change screen, like the left and right arrows a
 |:----:|:---:|:---:|:---:|:---:|:---:|
 |![Apps](./docimg/trackv2.pos.png)|![BSP](./docimg/trackv2.sog.png)|![AWS](./docimg/trackv2.compass.png)|![SOG](./docimg/trackv2.sun.pos.png)|![SOG](./docimg/trackv2.sun.z.png)|![SOG](./docimg/trackv2.ip.png)|
 
-The rotary detent can be used to change screen, like the left and right arrows and swipes on the screen.
+The rotary detent can be used to change screen, as well as left and right swipes on the screen.
+
+`Sun Z` stands for "Sun's Azimuth". If you point the needle to the Sun, you know where the North is 😜.
 
 ---
 
