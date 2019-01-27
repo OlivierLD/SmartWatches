@@ -68,11 +68,14 @@ Here is a way to make a REST GET request to some external resource:
     console.log("Weather data was requested");
 ```
 
-Make sure you use `"use strict";` if you need to use ES6 syntax.
-The IDE seems not to like it (shows syntax like `() => { ... }` as errored, but works OK, apparently.
+_Important_: Make sure you use `"use strict";` if you need (or want) to use ES6 syntax.
+The IDE seems not to like, it shows syntax like `() => { ... }` as errored, but it works OK, apparently.
 
 As it is a Web Application, your browser's Developer tools are available in `debug` mode. Very cool.
+
+_Note_: Look in the code for more elaborated examples of REST requests, also using ES6 Promises.
 
 #### To check
 - Web Socket availability?
 - Web Components support for HTML/JS/CSS apps?
+
