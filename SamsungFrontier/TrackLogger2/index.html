@@ -12,15 +12,17 @@
 	<script type="text/javascript">
 		"use strict";
 
-		let serverIp = "192.168.42.5";
+		let serverIp = "192.168.42.5"; // Use "localhost" for Preview and Tests. Works fine.
 		let serverPort = 9999;
 	</script>
-	<script src="js/AnalogDisplay.js"></script>
 	<!-- SOG  -->
-	<script src="js/CircularCompass.js"></script>
+	<script src="js/AnalogDisplay.js"></script>
 	<!-- COG -->
+	<script src="js/CircularCompass.js"></script>
+	<!-- Sun position, with a callback -->
 	<script src="js/Direction.js"></script>
-	<!-- Sun position -->
+	<!-- Track Map -->
+	<script src="js/TrackMap.js"></script>
 
 	<script src="js/ajax.manager.js"></script>
 	<script src="js/pub.sub.js"></script>
@@ -34,6 +36,7 @@
 
 		var displaySunPos;
 
+		var displayMap;
 		/**
 		 *  SUBSCRIBERS HERE.
 		 *
@@ -41,13 +44,20 @@
 		 */
 		events.subscribe('sog', function (val) {
 			displaySOG.setValue(val);
+			document.getElementById('sog-sum').innerText = 'SOG ' + val.toFixed(2) + ' kts';
+			displayMap.setLastSog(val);
 		});
 		events.subscribe('cog', function (val) {
 			displayCOG.setValue(val);
+			document.getElementById('cog-sum').innerHTML = 'COG ' + val.toFixed(0) + '&deg;';
+			displayMap.setLastCog(val);
 		});
 		events.subscribe('pos', function (val) {
 			document.getElementById('lat').innerText = decToSex(val.lat, "NS");
 			document.getElementById('lng').innerText = decToSex(val.lng, "EW");
+			displayMap.addPoint(val);
+			document.getElementById('lat-sum').innerText = decToSex(val.lat, "NS");
+			document.getElementById('lng-sum').innerText = decToSex(val.lng, "EW");
 		});
 		events.subscribe('gps-time', function (val) {
 			let year = val.getFullYear();
@@ -59,12 +69,18 @@
 
 			document.getElementById('utc-1').innerText = year + '-' + (month < 9 ? '0' + (month + 1) : month + 1) + '-' + (date < 10 ? '0' + date : date);
 			document.getElementById('utc-2').innerText = (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes) + ":" + (seconds < 10 ? '0' + seconds : seconds);
+			
+			document.getElementById('utc-1-sum').innerText = year + '-' + (month < 9 ? '0' + (month + 1) : month + 1) + '-' + (date < 10 ? '0' + date : date);
+			document.getElementById('utc-2-sum').innerText = (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes) + ":" + (seconds < 10 ? '0' + seconds : seconds);
 		});
 		events.subscribe('sun-pos', function (val) {
 			document.getElementById('sun-z').innerText = "Z " + val.z.toFixed(0) + String.fromCharCode(176);
 			document.getElementById('sun-alt').innerText = "Alt " + toDegMin(val.alt);
 			// And the azimuth on the display here
 			displaySunPos.setValue(val.z);
+			// Summary screen
+			document.getElementById('sun-z-sum').innerText = "Sun Z " + val.z.toFixed(0) + String.fromCharCode(176);
+			document.getElementById('sun-alt-sum').innerText = "Sun Alt " + toDegMin(val.alt);
 		});
 
 		function decToSex(val, ns_ew) {
@@ -153,6 +169,9 @@
 			displayCOG.setLabel('COG');
 			displayCOG.repaint();
 
+			displayMap = new TrackMap('mapCanvas', 350, 350, 'black', 'red', 'green', 400);
+			displayMap.repaint();
+
 			document.getElementById('screen-ip').innerText = serverIp + ':' + serverPort;
 
 			initMain();
@@ -165,9 +184,11 @@
 	<!--  was contents -->
 	<div style='margin: auto;'>
 		<div class="slideshow-container">
+		
+			<!-- 1 - Position -->
 			<div class="the-slides fade">
 				<div class="text-slide">
-					<div class="number-text">1 / 6</div>
+					<div class="number-text">1 / 9</div>
 					<div class="display">
 						<div class="display-title">Position</div>
 						<div class="display-data small-data">
@@ -179,20 +200,20 @@
 				</div>
 			</div>
 
+			<!-- 2 - SOG -->
 			<div class="the-slides fade">
-				<!-- SOG -->
 				<canvas id="sogCanvas" class="displayContent" width="350" height="350" title="Speed Over Ground"></canvas>
-
 			</div>
 
+			<!-- 3 - COG -->
 			<div class="the-slides fade">
-				<!-- COG -->
 				<canvas id="cogCanvas" class="displayContent" width="350" height="350" title="Course Over Ground"></canvas>
 			</div>
 
+			<!-- 4 - GPS Time -->
 			<div class="the-slides fade">
 				<div class="text-slide">
-					<div class="number-text">4 / 6</div>
+					<div class="number-text">4 / 9</div>
 					<div class="display">
 						<div class="display-title">GPS Time</div>
 						<div class="display-data small-data">
@@ -204,9 +225,10 @@
 				</div>
 			</div>
 
+			<!-- 5 - Sun Data -->
 			<div class="the-slides fade">
 				<div class="text-slide">
-					<div class="number-text">5 / 6</div>
+					<div class="number-text">5 / 9</div>
 					<div class="display">
 						<div class="display-title">Sun in the Sky</div>
 						<div class="display-data small-data">
@@ -218,22 +240,49 @@
 				</div>
 			</div>
 
+			<!-- 6 - Sun Z -->
 			<div class="the-slides fade">
-				<!-- Sun Z -->
 				<canvas id="sunCanvas" class="displayContent" width="350" height="350" title="Sun Azimuth"></canvas>
 			</div>
 
+			<!-- 7 - Track Map -->
+			<div class="the-slides fade">
+				<canvas id="mapCanvas" class="displayContent" width="350" height="350" title="Track Map"></canvas>
+			</div>
+			
+			<!-- 
+			8 - Summary screen
+			    SOG, COG, GPS Time, Position, Sun Data
+			 -->
+			<div class="the-slides fade">
+				<div class="text-slide">
+					<div class="number-text">8 / 9</div>
+					<div class="display">
+				<div class="display-data small-data" style="font-size: 18px;">
+					<div id="lat-sum">00&deg;00.00'N</div>
+					<div id="lng-sum">00&deg;00.00'E</div>
+					<div id="sog-sum">SOG 0.00 kts</div>
+					<div id="cog-sum">COG 000&deg;</div>
+					<div id="utc-1-sum">2018-12-21</div>
+					<div id="utc-2-sum">00:00:00</div>
+					<div id="sun-z-sum">Sun Z 000&deg;</div>
+					<div id="sun-alt-sum">Sun Alt 00.00&deg;</div>
+				</div>
+				</div>
+				</div>
+			</div>
+
+			<!-- 9 - Server IP & Port -->
 			<div class="the-slides fade">
 				<div class="text-slide">
 					<div style="margin: -40px 0 0 80px;"> <!--  class="display" -->
 
-						<div
-								style="width: 190px; height: 20px; vertical-align: top; font-size: 10px; text-align: center; padding-left: 10px;">
+						<div style="width: 190px; height: 20px; vertical-align: top; font-size: 10px; text-align: center; padding-left: 10px;">
 							<span>Server IP &amp; port:</span>
 						</div>
 						<!-- screen -->
-						<div style="width: 190px; height: 30px; vertical-align: middle;"><span
-								id="screen-ip">192.168.42.15:9999</span>
+						<div style="width: 190px; height: 30px; vertical-align: middle;">
+							<span id="screen-ip">192.168.42.15:9999</span>
 						</div>
 						<!-- Numpad -->
 						<table style="width: 200px;">
@@ -267,10 +316,10 @@
 			</div>
 		</div>
 
-		<!-- div id="for-debug" style="margin: 5px; text-align: center;">
+		<!--div id="for-debug" style="margin: 5px; text-align: center;">
 				<button onclick="flipSlides(-1);">&lt;</button>
 				<button onclick="flipSlides(+1);">&gt;</button>
-		</div -->
+		</div-->
 	</div>
 </div>
 
