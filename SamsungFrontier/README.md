@@ -41,7 +41,7 @@ The rotary detent can be used to change screen, like the left and right arrows a
 
 | POS | SOG | COG | Sun Pos | Sun Z | Server IP |
 |:----:|:---:|:---:|:---:|:---:|:---:|
-|![Apps](./docimg/trackv2.pos.png)|![BSP](./docimg/trackv2.sog.png)|![AWS](./docimg/trackv2.compass.png)|![SOG](./docimg/trackv2.sun.pos.png)|![SOG](./docimg/trackv2.sun.z.png)|![SOG](./docimg/trackv2.ip.png)|
+|![POS](./docimg/trackv2.pos.png)|![SOG](./docimg/trackv2.sog.png)|![COG](./docimg/trackv2.compass.png)|![Sun](./docimg/trackv2.sun.pos.png)|![SunZ](./docimg/trackv2.sun.z.png)|![Server IP](./docimg/trackv2.ip.png)|
 
 The rotary detent can be used to change screen, as well as left and right swipes on the screen.
 
@@ -49,6 +49,12 @@ The rotary detent can be used to change screen, as well as left and right swipes
 
 This is a configuration I like for kayaking. There is a logger ([RESTNavServer](https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTNavServer)) running on a `Raspberry Pi Zero W` in a waterproof box, and this is like a dashboard,
 you can see what you're doing. [Here](http://hocus-blogus.blogspot.com/2018/11/thanksgiving-kayaking-in-drakes-estero.html) is an example of such a logging.
+
+**The real watch with real data**
+| POS | SOG | COG | Sun Pos | Sun Z | Server IP |
+|:----:|:---:|:---:|:---:|:---:|:---:|
+|![POS](./docimg/real.01.jpg)|![SOG](./docimg/real.02.jpg)|![COG](./docimg/real.03.jpg)|![GPS Time](./docimg/real.04.jpg)|![Sun Data](./docimg/real.05.jpg)|![Sun Z](./docimg/real.06.jpg)|![Track](./docimg/real.07.jpg)|![Summary](./docimg/real.08.jpg)|![Server IP](./docimg/real.09.jpg)|
+
 
 ---
 
