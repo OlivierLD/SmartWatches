@@ -51,10 +51,10 @@ This is a configuration I like for kayaking. There is a logger ([RESTNavServer](
 you can see what you're doing. [Here](http://hocus-blogus.blogspot.com/2018/11/thanksgiving-kayaking-in-drakes-estero.html) is an example of such a logging.
 
 **The real watch with real data**
-| POS | SOG | COG | Sun Pos | Sun Z | Server IP |
-|:----:|:---:|:---:|:---:|:---:|:---:|
-|![POS](./docimg/real.01.jpg)|![SOG](./docimg/real.02.jpg)|![COG](./docimg/real.03.jpg)|![GPS Time](./docimg/real.04.jpg)|![Sun Data](./docimg/real.05.jpg)|![Sun Z](./docimg/real.06.jpg)|![Track](./docimg/real.07.jpg)|![Summary](./docimg/real.08.jpg)|![Server IP](./docimg/real.09.jpg)|
 
+| POS | SOG | COG | GPS Time | Sun Pos | Sun Z | Track | Summary | Server IP |
+|:----:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|![POS](./docimg/real.01.jpg)|![SOG](./docimg/real.02.jpg)|![COG](./docimg/real.03.jpg)|![GPS Time](./docimg/real.04.jpg)|![Sun Data](./docimg/real.05.jpg)|![Sun Z](./docimg/real.06.jpg)|![Track](./docimg/real.07.jpg)|![Summary](./docimg/real.08.jpg)|![Server IP](./docimg/real.09.jpg)|
 
 ---
 
