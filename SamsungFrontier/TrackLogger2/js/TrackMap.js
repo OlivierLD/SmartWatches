@@ -31,7 +31,7 @@ function TrackMap(cName, width, height, bgColor, fgColor, gridColor, buffSize) {
 		}
 		this.repaint();
 	};
-	
+
 	this.setLastCog = function(cog) {
 		this.lastCog = cog;
 	};
@@ -50,7 +50,7 @@ function TrackMap(cName, width, height, bgColor, fgColor, gridColor, buffSize) {
 		context.arc((canvas.width / 2), (canvas.height / 2), Math.min((canvas.width / 2), (canvas.height / 2)), 0, 2 * Math.PI, false);
 		context.strokeStyle = 'silver'; // Hard-coded, not needed on the real watch
 		context.stroke();
-		
+
 		// A grid, to show off
 		context.lineWidth = 1;
 		context.strokeStyle = this.gc;
@@ -65,7 +65,7 @@ function TrackMap(cName, width, height, bgColor, fgColor, gridColor, buffSize) {
 		}
 		context.stroke();
 		context.closePath();
-		
+
 		// A label to show off again
 		let fontSize = 20;
 		let text = 'THE TRACK';
@@ -77,7 +77,7 @@ function TrackMap(cName, width, height, bgColor, fgColor, gridColor, buffSize) {
 		context.beginPath();
 		context.fillStyle = this.gc;
 		context.fillText(text, (this.w / 2) - (len / 2), (this.h / 2) - (fontSize) - 2);
-		
+
 		if (this.lastCog !== undefined) {
 			text = 'COG ' + this.lastCog.toFixed(0) + String.fromCharCode(176);
 			let metrics = context.measureText(text);
@@ -111,7 +111,7 @@ function TrackMap(cName, width, height, bgColor, fgColor, gridColor, buffSize) {
 		let deltaLat = Math.abs(maxLat - minLat);
 		let deltaLng = Math.abs(maxLng - minLng);
 
-		let delta = Math.max(deltaLat, deltaLng); 
+		let delta = Math.max(deltaLat, deltaLng);
 		if (delta === 0) {
 			return; // Make sure it's not zero...
 		}
@@ -125,7 +125,7 @@ function TrackMap(cName, width, height, bgColor, fgColor, gridColor, buffSize) {
 		context.beginPath();
 		context.lineWidth = 3;
 		let sizeFactor = 1;
-		// 1 - find the right sizeFactor, for all the track to fit in the circle.
+		// 1 - find the right sizeFactor, for all the track points to fit in the circle.
 		this.posBuffer.forEach((pos, idx) => {
 			let x = (this.w / 2) + ((pos.lng - mapCenter.lng) * (this.w / delta));
 			let y = (this.h / 2) - ((pos.lat - mapCenter.lat) * (this.h / delta));
@@ -133,13 +133,12 @@ function TrackMap(cName, width, height, bgColor, fgColor, gridColor, buffSize) {
 			let dy = Math.abs((this.h / 2) - y);
 			let distToCenter = Math.sqrt((dx * dx) + (dy * dy));
 			sizeFactor = Math.min(sizeFactor, (this.w / 2) / distToCenter);
-		});	
+		});
 		sizeFactor *= 0.95; // Not too close to the borders.
 		// console.log('Factor:' + sizeFactor);
 		// 2 - Apply it.
 		var canvasX, canvasY;
 		this.posBuffer.forEach((pos, idx) => {
-			// TODO Make sure it's visible in the circle
 			canvasX = (this.w / 2) + (((pos.lng - mapCenter.lng) * (this.w / delta)) * sizeFactor);
 			canvasY = (this.h / 2) - (((pos.lat - mapCenter.lat) * (this.h / delta)) * sizeFactor);
 			if (pos === 0) {
