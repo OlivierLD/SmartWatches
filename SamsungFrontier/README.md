@@ -39,6 +39,8 @@ The rotary detent can be used to change screen, like the left and right arrows a
 ### NMEA Client ⛵
 #### <!-- WIP 🚧 --> REST Client for the [Nav Server](https://github.com/OlivierLD/raspberry-coffee/tree/master/RESTNavServer), V2.
 
+To change screen, use the rotary detent, or swipe the screen with a finger.
+
 | POS | SOG | COG | Sun Pos | Sun Z | Server IP |
 |:----:|:---:|:---:|:---:|:---:|:---:|
 |![POS](./docimg/trackv2.pos.png)|![SOG](./docimg/trackv2.sog.png)|![COG](./docimg/trackv2.compass.png)|![Sun](./docimg/trackv2.sun.pos.png)|![SunZ](./docimg/trackv2.sun.z.png)|![Server IP](./docimg/trackv2.ip.png)|
@@ -59,7 +61,7 @@ you can see what you're doing. [Here](http://hocus-blogus.blogspot.com/2018/11/t
 ---
 
 ### TODO
-- GPS Location 🛰️. Done &#9989;.
+- GPS Location (Basics) 🛰️. Done &#9989;.
 - Street Cleaning 🚗
 
 ---

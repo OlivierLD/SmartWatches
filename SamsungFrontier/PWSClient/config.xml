@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/PWSClient" version="1.0.0" viewmodes="maximized">
+    <access origin="*" subdomains="true"/>
+    <tizen:application id="I546KQmHOa.PWSClient" package="I546KQmHOa" required_version="3.0"/>
+    <author email="olivier@lediouris.net">Olivier LeDiouris</author>
+    <content src="index.html"/>
+    <description>Client for the Planr Watering System at https://github.com/OlivierLD/raspberry-coffee/tree/master/Project.Trunk/PlantWateringSystem
+</description>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <license>MIT</license>
+    <name>Plant Watering</name>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <tizen:profile name="wearable"/>
+</widget>
