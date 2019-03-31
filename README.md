@@ -36,13 +36,12 @@ Preferences > Network Connections, in all packages (Tizen, Certificates Manager,
 - In Tizen, right-click on your app (Hello Tizen) > Build signed packaged
 - In the menu bar, select the device or the emulator in the drop-down list
 - In the menu bar, from the "Run" poplist or from a right-click on the app name > Run (or Debug) as > Tizen Web App
+    - You may be prompted for your account password (to be entered twice, follow the instructions in the popup).
     - The app should be installed on your device.
 - Try to modify the code, add some `console` statements, re-build, re-run, and see for yourself!
 
-
-
 ##### REST Requests
-Here is a way to make a REST GET request to some external resource:
+Here is a way (and this is just **_a_** way, look into the code, look for `new Promise`) to make a REST `GET` request to some external resource:
 ```javascript
     // Do some REST Request here
     let url = "http://donpedro.lediouris.net/php/weather/reports.v2/json.data.php?type=ALL&period=LAST";
