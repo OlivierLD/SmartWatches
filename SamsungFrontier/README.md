@@ -5,7 +5,7 @@ Use the [Tizen IDE](https://www.tizen.org/) to  build them.
 -----------------------------------------------------------
 
 #### Lessons learned
-- CSS grid are supported... so-so on the Frontier.
+Recent features like WebComponents, CSS grids..., seem not to be 100% supported on my watch...
 
 ### REST Remote Switch
 Drive a Relay connected to a Raspberry Pi.
