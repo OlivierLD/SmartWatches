@@ -206,7 +206,6 @@ function keyPadKey(char) {
     }
 
     // Trap it, just to see how to do it.
-    // TODO: Flip the switch with the rotary?
     function rotEventHandler(event) {
         console.log("Rotary HW Event", event, event.detail.direction);
 
@@ -229,12 +228,12 @@ function keyPadKey(char) {
 
         document.addEventListener("rotarydetent", rotEventHandler);
         // Event Listeners would go here
-        
+
 		displayHUM = new AnalogDisplay('humCanvas', 173, 100, 10, 1, true, 40); // 173: ((350/2) - 2)
 		displayHUM.setValue(0);
 		displayHUM.setLabel('HUM');
 		displayHUM.repaint();
-		
+
 		let interval = window.setInterval(function() {
 			getPWSStatus()
 			.then(function(value) {
@@ -244,7 +243,7 @@ function keyPadKey(char) {
 			function(error) {
 				console.debug("PWSStatus error", error);
 			});
-			
+
 			getLastWateringTime()
 			.then(function(value) {
 				// console.log("getLastWateringTime:", value);
@@ -259,29 +258,29 @@ function keyPadKey(char) {
 			function(error) {
 				console.debug("getLastWateringTime error", error);
 			});
-			
+
 			getSensorData()
 			.then(function(value) {
 				let json = JSON.parse(value);
-//				console.log("getSensorData, hum:", json.humidity); 
+//				console.log("getSensorData, hum:", json.humidity);
 				displayHUM.setValue(json.humidity);
 			},
 			function(error) {
 				console.debug("getSensorData error", error);
 			});
 
-			
+
 			getRelayStatus()
 			.then(function(value) {
-//				console.log("getRelayStatus:", value); 
+//				console.log("getRelayStatus:", value);
 			},
 			function(error) {
 				console.debug("getRelayStatus error", error);
 			});
 
-		
+
 		}, 1000);
-		
+
 		console.debug('Done with init');
     }
 
