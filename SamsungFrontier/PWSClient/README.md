@@ -1,5 +1,5 @@
 # Plant Watering System Monitor
-REST Client for the [PWS Project](https://github.com/OlivierLD/raspberry-coffee/tree/master/Project.Trunk/PlantWateringSystem) for the Samsung Frontier watch.
+#### REST Client for the [PWS Project](https://github.com/OlivierLD/raspberry-coffee/tree/master/Project.Trunk/PlantWateringSystem) for the Samsung Frontier watch.
  
 It is a GUI (HTML/JS/CSS) for the REST services of the `/pws` family.
 
@@ -43,7 +43,7 @@ returns
     {
         "verb": "GET",
         "path": "/pws/pws-parameters",
-        "description": "Get program's parameters.",
+        "description": "Get program's parameters (humidity threshold, time to resume, etc)",
         "fn": {}
     },
     {
@@ -61,7 +61,7 @@ returns
     {
         "verb": "PUT",
         "path": "/pws/pws-parameters",
-        "description": "Set the Program's parameters (for debug)",
+        "description": "Set the Program's parameters  (humidity threshold, time to resume, etc).",
         "fn": {}
     }
 ]
