@@ -40,6 +40,8 @@ Preferences > Network Connections, in all packages (Tizen, Certificates Manager,
     - The app should be installed on your device.
 - Try to modify the code, add some `console` statements, re-build, re-run, and see for yourself!
 
+> _Quick Personal Note_: I found the certificate management a bit challenging...
+
 ##### REST Requests
 Here is a way (and this is just **_a_** way, look into the code, look for `new Promise`) to make a REST `GET` request to some external resource:
 ```javascript
