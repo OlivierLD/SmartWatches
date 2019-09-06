@@ -11,9 +11,22 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 	<script type="text/javascript">
 		"use strict";
-
-		let serverIp = "192.168.42.5"; // Use "localhost" for Preview and Tests. Works fine.
-		let serverPort = 9999;
+		
+		let defaultServerIp = "192.168.42.5"; // Use "localhost" for Preview and Tests. Works fine.
+		let defaultServerPort = "9999";
+		
+		// See https://developer.tizen.org/community/code-snippet/web-code-snippet/storing-data-html5-local-storage
+		
+		let serverIp = localStorage.getItem("serverIp");
+		let serverPortStr = localStorage.getItem("serverPort");
+		
+		if (serverIp === null || serverIp === undefined) {
+		  serverIp = defaultServerIp;
+		}
+		if (serverPortStr === null || serverPortStr === undefined) {
+		  serverPortStr = defaultServerPort;
+		}
+		let serverPort = Number(serverPortStr);
 	</script>
 	<!-- SOG  -->
 	<script src="js/AnalogDisplay.js"></script>

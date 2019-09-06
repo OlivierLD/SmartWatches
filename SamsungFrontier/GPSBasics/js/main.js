@@ -35,7 +35,7 @@ window.onload = () => {
 
 function onPosSuccess(pos) {
 	// Doc at https://w3c.github.io/geolocation-api/
-	// Positon object at https://w3c.github.io/geolocation-api/#position_interface
+	// Position object at https://w3c.github.io/geolocation-api/#position_interface
 	//
 	// Check privileges in config.xml
 	//
