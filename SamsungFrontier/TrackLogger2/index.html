@@ -143,6 +143,9 @@
 					serverIp = currentData.substring(0, currentData.indexOf(':'));
 					serverPort = currentData.substring(currentData.indexOf(':') + 1);
 					//  console.log("Server & port:", serverIp, serverPort);
+					// Store last data
+					localStorage.setItem("serverIp", serverIp);
+					localStorage.setItem("serverPort", serverPort);
 					flipSlides(+1);
 					break;
 				case "Cncl":
@@ -166,7 +169,7 @@
 			displaySunPos.setValue(0);
 			displaySunPos.setLabel('SunZ');
 			displaySunPos.setCbAfter((context, radius, displayValue, tipPos) => {
-//			console.log('Display Value in the callback:', displayValue);
+//			    console.log('Display Value in the callback:', displayValue);
 				context.beginPath();
 				context.arc(tipPos.x, tipPos.y, 10, 0, 2 * Math.PI, false);
 				context.closePath();

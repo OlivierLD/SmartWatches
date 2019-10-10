@@ -12,7 +12,7 @@ Was acquired by Fitbit. My Pebble repo was moved [here](./pebble), for archiving
         - Web app. development (IDE)
         - Extension SDK Samsung Certificate Extension
         - Extension SDK Samsung Wearable Extension
-- To connect a remote device (like a Frontier watch):
+- To connect a remote device (like a Frontier watch), _**on the device**_:
 ```
 > Settings > Connections > WiFi > WiFi Network > Tap Network Name > IP Address
 ```
@@ -31,7 +31,23 @@ Preferences > Network Connections, in all packages (Tizen, Certificates Manager,
 - On the watch, Settings > Connections > Wi-Fi > Wi-Fi Networks, find your Network and connect to it.
 - On the watch, Settings > Connections > Wi-Fi > Wi-Fi Networks, tap network name, and find your IP address.
 - In Tizen, Device Manager > Remote Device Manager > Find your device, and make sure in is ON.
-- In Tizen, Certificate Manager > create a new Samsung Certificate > Mobile/Wearable > Create a new profile, give it a name > Next > Create a new author certificate > Next > fill the fields, check the "apply the same password for distributor certificate" box > Next > Logging to your Samsung account when prompted > Next (Backup path not mandatory) > Next > Create a new distributor certificate > Enter passwords, and from the Device Manager, for each device (including Emulators you have started before), right-click on the device name, find the DUID > Click the 'Copy' button > Next > Finish > Make sure the certificate is active (checked). > Close.
+- In Tizen, Certificate Manager > create a new Samsung Certificate 
+    - \> Mobile/Wearable 
+    - \> Create a new profile, give it a name 
+    - \> Next 
+    - \> Create a new author certificate 
+    - \> Next 
+    - \> fill the fields, check the "apply the same password for distributor certificate" box 
+    - \> Next 
+    - \> Logging to your Samsung account when prompted > Next (Backup path not mandatory) 
+    - \> Next 
+    - \> Create a new distributor certificate 
+    - \> Enter passwords, and from the Device Manager, for each device (including Emulators you have started before), right-click on the device name, find the DUID 
+    - \> Click the 'Copy' button 
+    - \> Next 
+    - \> Finish 
+    - \> Make sure the certificate is active (checked). 
+    - \> Close.
 - If Tizen is running (and it probably is), re-start it.
 - In Tizen, right-click on your app (Hello Tizen) > Build signed packaged
 - In the menu bar, select the device or the emulator in the drop-down list
@@ -74,9 +90,10 @@ The IDE seems not to like, it shows arrow functions syntax like `() => { ... }` 
 
 As it is a Web Application, your browser's Developer tools are available in `debug` mode. Very cool.
 
-_Note_: Look in the code for more elaborated examples of REST requests, also using ES6 Promises.
+> _Note_: Look in the code for more elaborated examples of REST requests, also using ES6 Promises.
+
+> _Note_: To store data from one session to another, use `localStorage`, that works fine. Look in the code, that is the way we store IP addresses and ports...
 
 #### To check
 - Web Socket availability?
 - Web Components support for HTML/JS/CSS apps?
-
