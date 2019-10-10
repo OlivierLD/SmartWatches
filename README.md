@@ -70,7 +70,7 @@ Here is a way (and this is just **_a_** way, look into the code, look for `new P
 ```
 
 _Important_: Make sure you use `"use strict";` if you need (or want) to use ES6 syntax.
-The IDE seems not to like, it shows syntax like `() => { ... }` as errored, but it works OK, apparently.
+The IDE seems not to like, it shows arrow functions syntax like `() => { ... }` as errored, but it works OK, apparently.
 
 As it is a Web Application, your browser's Developer tools are available in `debug` mode. Very cool.
 
