@@ -16,8 +16,21 @@ const DEBUG = false;
 const DEFAULT_TIMEOUT = 60000; // 1 minute
 
 // let serverURL = "http://192.168.42.27:8088"; // Watering System server
-let serverIp = "192.168.42.27"; // Use "localhost" for Preview and Tests. Works fine.
-let serverPort = 8088;
+let defaultServerIp = "192.168.42.27"; // Use "localhost" for Preview and Tests. Works fine.
+let defaultServerPort = "8088";
+
+// See https://developer.tizen.org/community/code-snippet/web-code-snippet/storing-data-html5-local-storage
+
+let serverIp = localStorage.getItem("pwsServerIp");
+let serverPortStr = localStorage.getItem("pwsServerPort");
+
+if (serverIp === null || serverIp === undefined) {
+	serverIp = defaultServerIp;
+}
+if (serverPortStr === null || serverPortStr === undefined) {
+	serverPortStr = defaultServerPort;
+}
+let serverPort = Number(serverPortStr);
 let serverUrl = 'http://' + serverIp + ':' + serverPort;
 
 /* Uses ES6 Promises */
@@ -170,6 +183,9 @@ function keyPadKey(char) {
 			serverIp = currentData.substring(0, currentData.indexOf(':'));
 			serverPort = currentData.substring(currentData.indexOf(':') + 1);
 			//  console.log("Server & port:", serverIp, serverPort);
+			// Store last data
+			localStorage.setItem("pwsServerIp", serverIp);
+			localStorage.setItem("pwsServerPort", serverPort);
 			serverUrl = 'http://' + serverIp + ':' + serverPort;
 			flipSlides(+1);
 			break;
@@ -281,6 +297,7 @@ function keyPadKey(char) {
 
 		}, 1000);
 
+		document.getElementById('screen-ip').innerText = serverIp + ':' + serverPort;
 		console.debug('Done with init');
     }
 

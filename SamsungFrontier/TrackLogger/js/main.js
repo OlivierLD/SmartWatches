@@ -40,7 +40,7 @@ function handleTouchMove(evt) {
 }
 
 
-window.onload = function() {
+window.onload = () => {
     document.addEventListener('tizenhwkey', function(e) {
         if (e.keyName === "back") {
             try {
@@ -85,6 +85,8 @@ window.onload = function() {
 
     context.fillRect(0, 0, cWidth, canvas.height);
     plotTheSun(0);
+    
+    document.getElementById('screen-ip').innerText = serverIp + ':' + serverPort;
 };
 
 /* Static Utils */

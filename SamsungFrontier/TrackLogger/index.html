@@ -11,9 +11,23 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script type="text/javascript">
         "use strict";
+
+        let defaultServerIp = "192.168.42.36"; // Use "localhost" for Preview and Tests. Works fine.
+        let defaultServerPort = "9999";
+
+        // See https://developer.tizen.org/community/code-snippet/web-code-snippet/storing-data-html5-local-storage
+
+        let serverIp = localStorage.getItem("navServerIp");
+        let serverPortStr = localStorage.getItem("navServerPort");
+
+        if (serverIp === null || serverIp === undefined) {
+            serverIp = defaultServerIp;
+        }
+        if (serverPortStr === null || serverPortStr === undefined) {
+            serverPortStr = defaultServerPort;
+        }
+        let serverPort = Number(serverPortStr);
         
-        let serverIp = "192.168.42.15";
-        let serverPort = 9999;
     </script>
     <script src="js/ajax.manager.js"></script>
     <script src="js/pub.sub.js"></script>
@@ -21,7 +35,7 @@
 
     <script type="text/javascript">
         "use strict";
-        
+
         		/**
         		 *  SUBSCRIBERS HERE.
         		 *
@@ -44,7 +58,7 @@
                 let hours = val.getHours();
                 let minutes = val.getMinutes();
                 let seconds = val.getSeconds();
-        
+
         			document.getElementById('utc-1').innerText = year + '-' + (month < 9 ? '0' + (month + 1) : month + 1) + '-' + (date < 10 ? '0' + date : date);
         			document.getElementById('utc-2').innerText = (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes) + ":" + (seconds < 10 ? '0' + seconds : seconds);
         		});
@@ -54,7 +68,7 @@
         			// And the azimuth on the graph here
         			 plotTheSun(val.z);
         		});
-        
+
         		function decToSex(val, ns_ew) {
         			let absVal = Math.abs(val);
         			let intValue = Math.floor(absVal);
@@ -70,7 +84,7 @@
         				} else {
         					s += ns_ew === 'NS' ? 'N' : 'E';
         				}
-        
+
         				s += " ";
         			} else {
         				if (val < 0) {
@@ -80,14 +94,14 @@
         			s += i + String.fromCharCode(176) + dec.toFixed(2) + "'";
         			return s;
         		}
-        
+
         		function toDegMin(val) {
         			let intValue = Math.floor(val);
         			let dec = val - intValue;
         			dec *= 60;
         			return intValue + String.fromCharCode(176) + dec.toFixed(2) + "'";
         		}
-        		
+
         		function keyPadKey(char) {
        		  console.info(">>", char);
         		  let currentData = document.getElementById('screen-ip').innerText;
@@ -103,9 +117,12 @@
         		      serverIp = currentData.substring(0, currentData.indexOf(':'));
         		      serverPort = currentData.substring(currentData.indexOf(':') + 1);
         		  //  console.log("Server & port:", serverIp, serverPort);
+                  // Store last data
+                  localStorage.setItem("navServerIp", serverIp);
+                  localStorage.setItem("navServerPort", serverPort);
         		  	  plusSlides(+1);
-        		      break; 
-        		    case "Cncl": 
+        		      break;
+        		    case "Cncl":
         		      currentData = serverIp + ':' + serverPort;
         		      break;
         		    default:
@@ -202,7 +219,7 @@
                             <div class="the-slides fade" style="width: 200px; height: 280px; padding-top: 5px;">
                                 <div class="display" style="width: 200px; height: 280px; padding-top: 5px;">
 
-                                    <div style="width: 190px; height: 20px; vertical-align: top; font-size: 10px; text-align: left; padding-left: 10px;"><span>Server IP &amp; port:</span>
+                                    <div style="width: 190px; height: 20px; vertical-align: top; font-size: 10px; text-align: left; padding-left: 10px;"><span>Server IP &amp; Port:</span>
                                     </div>
                                     <!-- screen -->
                                     <div style="width: 190px; height: 30px; vertical-align: middle;"><span id="screen-ip">192.168.42.15:9999</span>
@@ -269,27 +286,27 @@
 
     <script type="text/javascript">
         "use strict";
-        
+
         	let auto = false;
-        
+
         	function manageClick(cb) {
         		auto = cb.checked;
         		if (auto) {
         			showSlides(slideIndex);
         		}
         	}
-        
+
         	let slideIndex = 1;
         	showSlides(slideIndex);
-        
+
         	function plusSlides(n) {
         		showSlides(slideIndex += n);
         	}
-        
+
         	function currentSlide(n) {
         		showSlides(slideIndex = n);
         	}
-        
+
         	function showSlides(n) {
         		let slides = document.getElementsByClassName("the-slides");
         		let dots = document.getElementsByClassName("dot");
@@ -310,7 +327,7 @@
         			//				slides[slideIndex - 1].style.display = "block";
         			slides[slideIndex - 1].classList.add("visible-slide"); // Show active one
         			dots[slideIndex - 1].className += " active";
-        			
+
         			if (slideIndex === 7) { // Numpad
         			  document.getElementById('dots').style.display = 'none';
         			  document.getElementById('auto-scroll').style.display = 'none';

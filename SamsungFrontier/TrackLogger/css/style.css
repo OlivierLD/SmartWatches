@@ -1,5 +1,6 @@
 * {
     font-family: Verdana, Lucida Sans, Arial, Helvetica, sans-serif;
+    color: white;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
 }
 
 
-.content_text {
+.content-text {
 	font-weight:bold;
 	font-size:5em;
 	color:#fff;
@@ -107,4 +108,41 @@ body {
 
 .command-button {
 	background-color: #2828de;
+}
+
+.display {
+    width: 190px;
+    height: auto;
+    /*border: 4px solid; 
+    border-radius: 10px;*/
+    padding-top: 30px;
+}
+
+.display-data {
+    text-align: center;
+    vertical-align: baseline;
+    margin: auto;
+    /*color: cyan;*/
+    font-size: 54px;
+    font-weight: bold;
+}
+
+.display-unit {
+    text-align: center;
+    vertical-align: baseline;
+    color: inherit;
+    font-size: 20px;
+}
+
+.display-title {
+    text-align: center;
+    vertical-align: bottom;
+    padding-left: 0;
+    align-self: end;
+    color: inherit;
+    font-size: 14px;
+}
+
+.small-data {
+	font-size: 24px;
 }
