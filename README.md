@@ -59,7 +59,7 @@ Preferences > Network Connections, in all packages (Tizen, Certificates Manager,
 > _Quick Personal Note_: I found the certificate management a bit challenging...
 
 ###### Note on the screen timeout
-The default timeout for the screen go turn off is 15 seconds.
+The default timeout for the screen to turn off is 15 seconds.
  
 This parameter can be changed in the settings of the watch.
 - `Settings` > `Display` > `Screen timeout`, can be between `10s` and `5 min`. 
