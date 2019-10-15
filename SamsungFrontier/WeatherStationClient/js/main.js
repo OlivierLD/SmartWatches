@@ -1,4 +1,7 @@
 /*
+ * Pings the server where weather data are stored, not the station.
+ * This way, the server's address remains constant (donpedro.lediouris.net/etc... )
+ *  
  * REST Data look like
 {
   "type": "ALL",

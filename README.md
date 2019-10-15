@@ -58,6 +58,12 @@ Preferences > Network Connections, in all packages (Tizen, Certificates Manager,
 
 > _Quick Personal Note_: I found the certificate management a bit challenging...
 
+###### Note on the screen timeout
+The default timeout for the screen go turn off is 15 seconds.
+ 
+This parameter can be changed in the settings of the watch.
+- `Settings` > `Display` > `Screen timeout`, can be between `10s` and `5 min`. 
+
 ##### REST Requests
 Here is a way (and this is just **_a_** way, look into the code, look for `new Promise`) to make a REST `GET` request to some external resource:
 ```javascript
