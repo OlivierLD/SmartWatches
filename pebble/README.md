@@ -28,25 +28,25 @@ I'm looking forward to a watch that could use a TCP based protocol to get connec
 
 Featuring:
 
-- [A Sheep Counter](https://github.com/OlivierLD/pebble/tree/master/Counter)
+- [A Sheep Counter](https://github.com/OlivierLD/SmartWatches/tree/master/pebble/Counter)
     - A 2-page application
     - Action bar (Up, Down, Select)
     - Custom menu icon
-- [GPS Location](https://github.com/OlivierLD/pebble/tree/master/GPS.Location) 
+- [GPS Location](https://github.com/OlivierLD/SmartWatches/tree/master/pebble/GPS.Location) 
     - GPS Location (Position, Heading, Speed)
     - Configuration
     - Shake to reset
-- [A REST client](https://github.com/OlivierLD/pebble/tree/master/REST)
+- [A REST client](https://github.com/OlivierLD/SmartWatches/tree/master/pebble/REST)
     - REST Client
     - Configuration
-- [An NMEA Application](https://github.com/OlivierLD/pebble/tree/master/NMEA)
+- [An NMEA Application](https://github.com/OlivierLD/SmartWatches/tree/master/pebble/NMEA)
     - WebSocket client
     - Configuration
     - Menu Usage
     - Several pages
     - Custom menu icon
     - Custom application icon
-- [Street Cleaning](https://github.com/OlivierLD/pebble/tree/master/Street.Cleaning)
+- [Street Cleaning](https://github.com/OlivierLD/SmartWatches/tree/master/pebble/Street.Cleaning)
     - Multi-file app
     - Action Bar
     - Dynamic menu

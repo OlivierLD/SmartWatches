@@ -53,6 +53,7 @@ var setSwitch = function(position) {
     var url = PREFIX + ONOFF_FEED + "/data";
     xhr = new XMLHttpRequest();
 
+    // TODO ES6 syntax? () => { ... }
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 201) {
             console.log("XHR returns", xhr.responseText);
