@@ -185,7 +185,7 @@ function deleteLogFile(logFile) {
 }
 
 function getSystemTime() {
-    return getPromise(BASE_URL + '/mux/system-time?fmt=date', DEFAULT_TIMEOUT, 'GET', 200, null, false);
+    return getPromise(getBaseURL() + '/mux/system-time?fmt=date', DEFAULT_TIMEOUT, 'GET', 200, null, false);
 }
 
 function getForwarderStatus() {

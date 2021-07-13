@@ -198,7 +198,7 @@ function deleteLogFile(logFile) {
 }
 
 function getSystemTime() {
-	return getPromise(BASE_URL + '/mux/system-time?fmt=date', DEFAULT_TIMEOUT, 'GET', 200, null, false);
+	return getPromise(getBaseURL() + '/mux/system-time?fmt=date', DEFAULT_TIMEOUT, 'GET', 200, null, false);
 }
 
 function getForwarderStatus() {
@@ -490,7 +490,7 @@ function onMessage(json) {
 			let buffered = json['Current calculated with damping'];
 			if (buffered !== undefined) {
 				let keys = Object.keys(buffered);
-				for (let i = 0; i < keys.length; i++) {
+				for (var i = 0; i < keys.length; i++) {
 					let k = keys[i];
 					//				console.log("K:" + k);
 					let damp = buffered[k];

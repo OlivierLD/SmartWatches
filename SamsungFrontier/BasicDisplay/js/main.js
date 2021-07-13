@@ -1,17 +1,20 @@
 var displayBSP;
 var bspValue = 0;
 const BSP_MIN = 0,
-    BSP_MAX = 15;
+      BSP_MAX = 15;
+
+// import * from "./AnalogDisplay.js";
 
 window.onload = () => {
     // TODO:: Do your initialization job
 
     // add eventListener for tizenhwkey
     document.addEventListener('tizenhwkey', function(e) {
-        if (e.keyName === "back")
+        if (e.keyName === "back") {
             try {
                 tizen.application.getCurrentApplication().exit();
             } catch (ignore) {}
+        }
     });
 
     function plusOne() {
